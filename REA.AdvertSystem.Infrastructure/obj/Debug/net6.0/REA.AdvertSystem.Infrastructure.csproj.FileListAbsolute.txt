@@ -1,0 +1,17 @@
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\bin\Debug\net6.0\REA.AdvertSystem.Infrastructure.deps.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\bin\Debug\net6.0\REA.AdvertSystem.Infrastructure.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\bin\Debug\net6.0\REA.AdvertSystem.Infrastructure.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\bin\Debug\net6.0\REA.AdvertSystem.Application.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\bin\Debug\net6.0\REA.AdvertSystem.Domain.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\bin\Debug\net6.0\REA.AdvertSystem.Application.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\bin\Debug\net6.0\REA.AdvertSystem.Domain.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\REA.AdvertSystem.Infrastructure.csproj.AssemblyReference.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\REA.AdvertSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\REA.AdvertSystem.Infrastructure.AssemblyInfoInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\REA.AdvertSystem.Infrastructure.AssemblyInfo.cs
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\REA.AdvertSystem.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\REA.AdvertSystem.Infrastructure.csproj.CopyComplete
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\REA.AdvertSystem.Infrastructure.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\refint\REA.AdvertSystem.Infrastructure.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\REA.AdvertSystem.Infrastructure.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Infrastructure\obj\Debug\net6.0\ref\REA.AdvertSystem.Infrastructure.dll

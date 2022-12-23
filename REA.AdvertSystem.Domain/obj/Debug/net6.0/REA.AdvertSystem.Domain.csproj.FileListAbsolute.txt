@@ -1,0 +1,12 @@
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\bin\Debug\net6.0\REA.AdvertSystem.Domain.deps.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\bin\Debug\net6.0\REA.AdvertSystem.Domain.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\bin\Debug\net6.0\REA.AdvertSystem.Domain.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\REA.AdvertSystem.Domain.csproj.AssemblyReference.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\REA.AdvertSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\REA.AdvertSystem.Domain.AssemblyInfoInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\REA.AdvertSystem.Domain.AssemblyInfo.cs
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\REA.AdvertSystem.Domain.csproj.CoreCompileInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\REA.AdvertSystem.Domain.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\refint\REA.AdvertSystem.Domain.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\REA.AdvertSystem.Domain.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Domain\obj\Debug\net6.0\ref\REA.AdvertSystem.Domain.dll

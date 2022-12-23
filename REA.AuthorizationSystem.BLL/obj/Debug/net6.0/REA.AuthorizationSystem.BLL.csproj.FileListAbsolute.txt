@@ -1,0 +1,15 @@
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\bin\Debug\net6.0\REA.AuthorizationSystem.BLL.deps.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\bin\Debug\net6.0\REA.AuthorizationSystem.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\bin\Debug\net6.0\REA.AuthorizationSystem.BLL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\bin\Debug\net6.0\REA.AuthorizationSystem.DAL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\bin\Debug\net6.0\REA.AuthorizationSystem.DAL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\REA.AuthorizationSystem.BLL.csproj.AssemblyReference.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\REA.AuthorizationSystem.BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\REA.AuthorizationSystem.BLL.AssemblyInfoInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\REA.AuthorizationSystem.BLL.AssemblyInfo.cs
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\REA.AuthorizationSystem.BLL.csproj.CoreCompileInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\REA.AuthorizationSystem.BLL.csproj.CopyComplete
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\REA.AuthorizationSystem.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\refint\REA.AuthorizationSystem.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\REA.AuthorizationSystem.BLL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AuthorizationSystem.BLL\obj\Debug\net6.0\ref\REA.AuthorizationSystem.BLL.dll

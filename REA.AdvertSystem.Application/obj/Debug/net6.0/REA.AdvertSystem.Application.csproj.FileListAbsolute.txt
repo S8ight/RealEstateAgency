@@ -1,0 +1,15 @@
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\REA.AdvertSystem.Application.deps.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\REA.AdvertSystem.Application.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\REA.AdvertSystem.Application.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\REA.AdvertSystem.Domain.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\REA.AdvertSystem.Domain.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.csproj.AssemblyReference.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.AssemblyInfoInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.AssemblyInfo.cs
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.csproj.CoreCompileInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.csproj.CopyComplete
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\refint\REA.AdvertSystem.Application.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\ref\REA.AdvertSystem.Application.dll

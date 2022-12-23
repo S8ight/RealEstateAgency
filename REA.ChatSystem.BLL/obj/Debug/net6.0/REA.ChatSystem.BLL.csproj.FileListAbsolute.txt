@@ -1,0 +1,15 @@
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\REA.ChatSystem.BLL.deps.json
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\REA.ChatSystem.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\REA.ChatSystem.BLL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\REA.ChatSystem.DAL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\REA.ChatSystem.DAL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.csproj.AssemblyReference.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.AssemblyInfoInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.AssemblyInfo.cs
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.csproj.CoreCompileInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.csproj.CopyComplete
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\refint\REA.ChatSystem.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\ref\REA.ChatSystem.BLL.dll

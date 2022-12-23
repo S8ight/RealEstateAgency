@@ -1,0 +1,14 @@
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\bin\Debug\net6.0\REA.ChatSystem.DAL.deps.json
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\bin\Debug\net6.0\REA.ChatSystem.DAL.runtimeconfig.json
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\bin\Debug\net6.0\REA.ChatSystem.DAL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\bin\Debug\net6.0\REA.ChatSystem.DAL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\REA.ChatSystem.DAL.csproj.AssemblyReference.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\REA.ChatSystem.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\REA.ChatSystem.DAL.AssemblyInfoInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\REA.ChatSystem.DAL.AssemblyInfo.cs
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\REA.ChatSystem.DAL.csproj.CoreCompileInputs.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\REA.ChatSystem.DAL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\refint\REA.ChatSystem.DAL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\REA.ChatSystem.DAL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\REA.ChatSystem.DAL.genruntimeconfig.cache
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.DAL\obj\Debug\net6.0\ref\REA.ChatSystem.DAL.dll

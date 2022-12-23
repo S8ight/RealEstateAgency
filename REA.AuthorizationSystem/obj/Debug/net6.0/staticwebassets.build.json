@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "xvQCvFSKToQJaSpPuqAD6ULLuZqX0WP25N4GFh0W3QA=",
+  "Source": "REA.AuthorizationSystem",
+  "BasePath": "_content/REA.AuthorizationSystem",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

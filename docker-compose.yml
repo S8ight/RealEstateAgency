@@ -1,0 +1,79 @@
+version: "3.4"
+services:
+  MSSQLDataBase: 
+    container_name: MSSQLDataBase
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment: 
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=msSQL123
+    ports: 
+      - 1337:1433
+    volumes:
+      - ./REA.mssql_data:/data:/var/opt/mssql/data
+      - ./REA.mssql_data:/log:/var/opt/mssql/log
+      - ./REA.mssql_data:/secrets:/var/opt/mssql/secrets
+
+  MongoDataBase:
+    container_name: MongoDataBase
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongoDB123
+    ports: 
+      - 1338:27017
+    volumes:
+        - ./REA.mongo_data:/data/db
+
+  RedisDataBase:
+    container_name: RedisDataBase
+    image: redis
+    ports: 
+      - 1335:6379
+
+  RabbitMQMessageBroker:
+    container_name: RabbitMQMessageBroker
+    tty: true
+    hostname: rabbitmq
+    image: rabbitmq:3-management
+    ports: 
+      - 1334:5672
+      - 5672:5672
+      - 15672:15672
+
+  REA.AdvertSystem:
+    container_name: REA.AdvertSystem
+    image: ${DOCKER_REGISTRY-}advertsystem
+    build: 
+      context: .
+      dockerfile: REA.AdvertSystem/Dockerfile
+    ports:
+      - 1553:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - AdvertDatabase:ConnectionString=mongodb://root:mongoDB123@MongoDataBase:1433
+
+  REA.ChatSystem:
+    container_name: REA.ChatSystem
+    image: ${DOCKER_REGISTRY-}chatsystem
+    build: 
+      context: .
+      dockerfile: REA.ChatSystem/Dockerfile
+    ports:
+      - 1554:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Data Source=MSSQLDataBase;Initial Catalog=AgencyChatSystem;User Id=SA;Password=msSQL123;TrustServerCertificate=True;"
+      - "ConnectionStrings:RabbitMQConnection=rabbitmq://rabbitmq:5672;"
+
+  REA.AuthorizationSystem:
+    container_name: REA.AuthorizationSystem
+    image: ${DOCKER_REGISTRY-}authorizationsystem
+    build: 
+      context: .
+      dockerfile: REA.AuthorizationSystem/Dockerfile
+    ports:
+      - 1555:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Data Source=MSSQLDataBase,1337;Initial Catalog=AgencyUserSystem;User Id=SA; Password=msSQL123; TrustServerCertificate=True;"
+      - "ConnectionStrings:RabbitMQConnection=rabbitmq://rabbitmq:5672;"
