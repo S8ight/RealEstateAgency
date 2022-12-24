@@ -4,8 +4,6 @@ import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "DiscountGrpcService.Protos";
 
-package greet;
-
 service DiscountProtoService {
   rpc GetDiscount (GetDiscountRequest) returns (DiscountResponse);
   rpc AddDiscount (AddDiscountRequest) returns (AddDiscountResponse);

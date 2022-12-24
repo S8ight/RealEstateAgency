@@ -2,10 +2,12 @@ using FluentValidation;
 using MediatR;
 using MongoDB.Driver;
 using System.Reflection;
+using DiscountGrpcService.Protos;
 using MassTransit;
 using REA.AdvertSystem.Application.Adverts.Commands;
 using REA.AdvertSystem.Application.Adverts.Queries;
 using REA.AdvertSystem.Application.Common.Behaviours;
+using REA.AdvertSystem.Application.Common.GrpcServices;
 using REA.AdvertSystem.Application.Common.Interfaces;
 using REA.AdvertSystem.Application.Common.Mapping;
 using REA.AdvertSystem.Application.Common.Models;
@@ -19,6 +21,14 @@ builder.Services.AddSingleton<IMongoClient>(s =>
         new MongoClient(builder.Configuration.GetValue<string>("AdvertDatabase:ConnectionString")));
 
 builder.Services.AddScoped<IAgencyDbConnection, AgencyDbConnection>();
+
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
+(g =>
+{
+    g.Address = new Uri( /*builder.Configuration["ConnectionStrings:Grpc"]*/"http://localhost:7180");
+});
+builder.Services.AddScoped<DiscountServiceGrpc>();
+
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -279,3 +279,15 @@ D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\REA.AdvertSy
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\REA.AdvertSystem.Application.pdb
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\REA.AdvertSystem.Infrastructure.pdb
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\REA.AdvertSystem.Domain.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\DiscountGrpcService.deps.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\DiscountGrpcService.runtimeconfig.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\DiscountGrpcService.exe
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\Google.Protobuf.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\Grpc.AspNetCore.Server.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\Grpc.AspNetCore.Server.ClientFactory.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\Grpc.Core.Api.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\Grpc.Net.Client.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\Grpc.Net.ClientFactory.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\Grpc.Net.Common.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\DiscountGrpcService.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem\bin\Debug\net6.0\DiscountGrpcService.pdb

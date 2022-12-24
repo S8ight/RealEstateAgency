@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "dXA4JXsZ/qGjm+JAWU2U3M/ye54D/Z3tn4v+Dbk1x4w=",
+  "Hash": "jCjVWErPra1b1Ic4yZBtZNzG+ZlFAtfhgVm+CBqh7AE=",
   "Source": "REA.AdvertSystem",
   "BasePath": "_content/REA.AdvertSystem",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\DiscountGrpcService.csproj",
+      "Version": 2,
+      "Source": "DiscountGrpcService",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

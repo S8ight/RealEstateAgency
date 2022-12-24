@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using REA.AdvertSystem.Application.Adverts.Commands;
 using REA.AdvertSystem.Application.Adverts.Queries;
 using REA.AdvertSystem.Application.Common.DTO.AdvertDTO;
+using REA.AdvertSystem.Application.Common.GrpcServices;
 using REA.AdvertSystem.Application.Common.Models;
 
 namespace REA.AdvertSystem.Controllers;
@@ -14,6 +15,13 @@ public class AdvertController : ControllerBase
     private IMediator _mediator = null!;
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
 
+    private DiscountServiceGrpc _discountServiceGrpc;
+    
+    public AdvertController(DiscountServiceGrpc discountServiceGrpc)
+    {
+        _discountServiceGrpc = discountServiceGrpc;
+    }
+    
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -32,7 +40,14 @@ public class AdvertController : ControllerBase
     {
         try
         {
-            return Ok(await Mediator.Send(query));
+            var adverts = await Mediator.Send(query);
+
+            foreach (var advert in adverts.Items)
+            {
+                var newPrice = _discountServiceGrpc.GetDiscount(advert.AdvertID, advert.Price);
+                advert.Price = newPrice.Result.CalculatedPrice;
+            }
+            return Ok(adverts);
         }
         catch (Exception ex)
         {
@@ -49,7 +64,10 @@ public class AdvertController : ControllerBase
         try
         {
             GetAdvertsById query = new GetAdvertsById() { Id = id };
-            return Ok(await Mediator.Send(query));
+            var advert = await Mediator.Send(query);
+            var newPrice = _discountServiceGrpc.GetDiscount(id, advert.Price);
+            advert.Price = newPrice.Result.CalculatedPrice;
+            return Ok(advert);
         }
         catch (Exception ex)
         {

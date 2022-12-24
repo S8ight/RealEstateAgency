@@ -18,18 +18,18 @@ public class DiscountGrpcService : DiscountProtoService.DiscountProtoServiceBase
         _logger = logger;
     }
 
-    public async Task<DiscountResponse> GetDiscount(GetDiscountRequest request)
+    public override async Task<DiscountResponse> GetDiscount(GetDiscountRequest request, ServerCallContext context)
     {
         var discount = await _discountRepository.GetDiscount(request.AdvertId);
         if (discount == null) return new DiscountResponse{ CalculatedPrice = request.Price};
-        float calculatedPrice = request.Price - request.Price * (discount.Percentage / 100);
+        float calculatedPrice = request.Price - request.Price * discount.Percentage / 100;
         return new DiscountResponse
         {
             CalculatedPrice = calculatedPrice
         };
     }
-    
-    public async Task<AddDiscountResponse> AddDiscount(AddDiscountRequest request)
+
+    public override async Task<AddDiscountResponse> AddDiscount(AddDiscountRequest request, ServerCallContext context)
     {
         var model = _mapper.Map<Discount.Discount>(request);
         var discount = _discountRepository.AddDiscount(model);
@@ -40,8 +40,8 @@ public class DiscountGrpcService : DiscountProtoService.DiscountProtoServiceBase
             Success = discount.IsCompletedSuccessfully
         };
     }
-    
-    public async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request)
+
+    public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
     {
         var discount = _discountRepository.DeleteDiscount(request.AdvertId);
         _logger.LogInformation("Discount with key {DiscountAdvertId} was deleted", request.AdvertId);

@@ -13,3 +13,10 @@ D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\refint\REA.AdvertSystem.Application.dll
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\REA.AdvertSystem.Application.pdb
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\obj\Debug\net6.0\ref\REA.AdvertSystem.Application.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\DiscountGrpcService.deps.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\DiscountGrpcService.runtimeconfig.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\appsettings.Development.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\appsettings.json
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\DiscountGrpcService.exe
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\DiscountGrpcService.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\DiscountGrpcService.pdb

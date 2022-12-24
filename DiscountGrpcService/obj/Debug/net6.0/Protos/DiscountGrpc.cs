@@ -10,7 +10,7 @@ using grpc = global::Grpc.Core;
 namespace DiscountGrpcService.Protos {
   public static partial class DiscountProtoService
   {
-    static readonly string __ServiceName = "greet.DiscountProtoService";
+    static readonly string __ServiceName = "DiscountProtoService";
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static void __Helper_SerializeMessage(global::Google.Protobuf.IMessage message, grpc::SerializationContext context)
@@ -46,41 +46,41 @@ namespace DiscountGrpcService.Protos {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.GetDiscountRequest> __Marshaller_greet_GetDiscountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.GetDiscountRequest.Parser));
+    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.GetDiscountRequest> __Marshaller_GetDiscountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.GetDiscountRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.DiscountResponse> __Marshaller_greet_DiscountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.DiscountResponse.Parser));
+    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.DiscountResponse> __Marshaller_DiscountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.DiscountResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.AddDiscountRequest> __Marshaller_greet_AddDiscountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.AddDiscountRequest.Parser));
+    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.AddDiscountRequest> __Marshaller_AddDiscountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.AddDiscountRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.AddDiscountResponse> __Marshaller_greet_AddDiscountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.AddDiscountResponse.Parser));
+    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.AddDiscountResponse> __Marshaller_AddDiscountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.AddDiscountResponse.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.DeleteDiscountRequest> __Marshaller_greet_DeleteDiscountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.DeleteDiscountRequest.Parser));
+    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.DeleteDiscountRequest> __Marshaller_DeleteDiscountRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.DeleteDiscountRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.DeleteDiscountResponse> __Marshaller_greet_DeleteDiscountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.DeleteDiscountResponse.Parser));
+    static readonly grpc::Marshaller<global::DiscountGrpcService.Protos.DeleteDiscountResponse> __Marshaller_DeleteDiscountResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::DiscountGrpcService.Protos.DeleteDiscountResponse.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::DiscountGrpcService.Protos.GetDiscountRequest, global::DiscountGrpcService.Protos.DiscountResponse> __Method_GetDiscount = new grpc::Method<global::DiscountGrpcService.Protos.GetDiscountRequest, global::DiscountGrpcService.Protos.DiscountResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetDiscount",
-        __Marshaller_greet_GetDiscountRequest,
-        __Marshaller_greet_DiscountResponse);
+        __Marshaller_GetDiscountRequest,
+        __Marshaller_DiscountResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::DiscountGrpcService.Protos.AddDiscountRequest, global::DiscountGrpcService.Protos.AddDiscountResponse> __Method_AddDiscount = new grpc::Method<global::DiscountGrpcService.Protos.AddDiscountRequest, global::DiscountGrpcService.Protos.AddDiscountResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "AddDiscount",
-        __Marshaller_greet_AddDiscountRequest,
-        __Marshaller_greet_AddDiscountResponse);
+        __Marshaller_AddDiscountRequest,
+        __Marshaller_AddDiscountResponse);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::DiscountGrpcService.Protos.DeleteDiscountRequest, global::DiscountGrpcService.Protos.DeleteDiscountResponse> __Method_DeleteDiscount = new grpc::Method<global::DiscountGrpcService.Protos.DeleteDiscountRequest, global::DiscountGrpcService.Protos.DeleteDiscountResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "DeleteDiscount",
-        __Marshaller_greet_DeleteDiscountRequest,
-        __Marshaller_greet_DeleteDiscountResponse);
+        __Marshaller_DeleteDiscountRequest,
+        __Marshaller_DeleteDiscountResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
