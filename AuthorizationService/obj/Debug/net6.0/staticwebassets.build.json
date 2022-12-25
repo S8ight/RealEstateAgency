@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JnFQK5hhHMdJaX/AjA+bFoqpcPlbJpEgcPFZo9a7pnU=",
+  "Source": "AuthorizationService",
+  "BasePath": "_content/AuthorizationService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

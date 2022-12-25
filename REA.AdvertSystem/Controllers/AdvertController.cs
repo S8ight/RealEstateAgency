@@ -59,7 +59,7 @@ public class AdvertController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet("{id}")]
-    public async Task<ActionResult<AdvertResponse>> GetByID(string id)
+    public async Task<ActionResult<AdvertResponse>> GetById(string id)
     {
         try
         {
