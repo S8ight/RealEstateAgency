@@ -303,3 +303,14 @@ D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\REA.ChatSystem
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\REA.ChatSystem.DAL.dll
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\REA.ChatSystem.BLL.pdb
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\REA.ChatSystem.DAL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\BCrypt.Net.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\MailKit.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\MimeKit.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\AuthorizationService.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\AuthorizationService.DAL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\AuthorizationService.BLL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\AuthorizationService.DAL.pdb

@@ -16,5 +16,7 @@ public class AutoMapperConfiguration : Profile
         CreateMap<RegisterRequest, User>();
 
         CreateMap<CreateRequest, User>();
+        
+        CreateMap<User, QueueRequest>();
     }
 }

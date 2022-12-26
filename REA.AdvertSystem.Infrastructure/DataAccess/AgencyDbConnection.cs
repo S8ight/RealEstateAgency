@@ -5,7 +5,7 @@ namespace REA.AdvertSystem.Infrastructure.DataAccess
 {
     public class AgencyDbConnection : IAgencyDbConnection
     {
-        private const string ConnectionString = "mongodb://root:mongoDB123@localhost:1338";
+        private const string ConnectionString = "mongodb://MongoDataBase:27017";
         private const string DatabaseName = "AgencyAdvertSystem";
         private const string AdvertCollection = "Advert";
         private const string PhotoListCollection = "PhotoList";

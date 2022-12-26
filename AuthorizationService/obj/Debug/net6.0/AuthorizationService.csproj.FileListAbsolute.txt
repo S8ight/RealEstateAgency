@@ -76,3 +76,8 @@ D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\obj\Debug\net6.0\refint\A
 D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\obj\Debug\net6.0\AuthorizationService.pdb
 D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\obj\Debug\net6.0\AuthorizationService.genruntimeconfig.cache
 D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\obj\Debug\net6.0\ref\AuthorizationService.dll
+D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\bin\Debug\net6.0\MassTransit.dll
+D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\bin\Debug\net6.0\MassTransit.Abstractions.dll
+D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\bin\Debug\net6.0\MassTransit.RabbitMqTransport.dll
+D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\bin\Debug\net6.0\RabbitMQ.Client.dll
+D:\Knowledge\OOP\RealEstateAgency\AuthorizationService\bin\Debug\net6.0\System.Text.Json.dll

@@ -9,12 +9,13 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="12.0.0" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-      <PackageReference Include="MassTransit" Version="8.0.10-develop.692" />
+      <PackageReference Include="MassTransit" Version="8.0.10-develop.714" />
       <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
       <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\AuthorizationService.BLL\AuthorizationService.BLL.csproj" />
       <ProjectReference Include="..\REA.ChatSystem.DAL\REA.ChatSystem.DAL.csproj" />
     </ItemGroup>
 

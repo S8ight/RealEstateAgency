@@ -50,7 +50,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<UserConsumer>();
+    x.AddConsumer<ChatUserConsumer>();
  
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -59,7 +59,7 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("chat-user-queue", ep =>
         {
             ep.PrefetchCount = 20;
-            ep.ConfigureConsumer<UserConsumer>(context);
+            ep.ConfigureConsumer<ChatUserConsumer>(context);
         });
     });
 });

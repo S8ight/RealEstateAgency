@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using AuthorizationService.BLL.DTO.Request;
 using AuthorizationService.BLL.Extensions.Authorization;
 using AuthorizationService.BLL.Extensions.Helpers;
 using AuthorizationService.BLL.Interfaces;
@@ -6,6 +7,7 @@ using AuthorizationService.BLL.Services;
 using AuthorizationService.DAL.Context;
 using AuthorizationService.DAL.Data.Interfaces;
 using AuthorizationService.DAL.Data.Repositories;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +34,20 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddControllers();
+
+builder.Services.AddMassTransit(x =>
+{
+    
+    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+    {
+        config.Host(new Uri("rabbitmq://rabbitmq:5672"), h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+        config.Message<QueueRequest>(x=>{ });
+    }));
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

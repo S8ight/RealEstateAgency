@@ -7,6 +7,7 @@ using AuthorizationService.DAL.Context;
 using AuthorizationService.DAL.Data.Interfaces;
 using AuthorizationService.DAL.Entities;
 using AutoMapper;
+using MassTransit;
 using Microsoft.Extensions.Options;
 
 namespace AuthorizationService.BLL.Services;
@@ -19,9 +20,10 @@ public class UserService : IUserService
     private readonly AuthorizationContext _context;
     private readonly AppSettings _appSettings;
     private readonly IEmailService _emailService;
+    private readonly IBusControl _bus;
 
     public UserService(IUserRepository userRepository, IJwtUtils jwtUtils, IMapper mapper, IOptions<AppSettings> appSettings,
-        IEmailService emailService, AuthorizationContext context)
+        IEmailService emailService, AuthorizationContext context, IBusControl bus)
     {
         _userRepository = userRepository;
         _jwtUtils = jwtUtils;
@@ -29,6 +31,7 @@ public class UserService : IUserService
         _appSettings = appSettings.Value;
         _emailService = emailService;
         _context = context;
+        _bus = bus;
     }
 
     public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model, string ipAddress)
@@ -128,14 +131,12 @@ public class UserService : IUserService
         user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
         await _userRepository.Create(user);
-        //_context.User.Add(user);
-        //await _context.SaveChangesAsync();
-
+        
         // send email
         SendVerificationEmail(user, origin);
     }
     
-    public void VerifyEmail(string token)
+    public async Task VerifyEmail(string token)
     {
         var user = _userRepository.GetByToken(token).Result;
 
@@ -147,6 +148,12 @@ public class UserService : IUserService
 
         _context.User.Update(user);
         _context.SaveChanges();
+        
+        var queueUser = _mapper.Map<QueueRequest>(user);
+        queueUser.Photo = null;
+        // var endpoint = await _bus.GetSendEndpoint(new Uri("exchange:chat-user-queue"));
+        // await endpoint.Send(queueUser);
+        await _bus.Publish(queueUser);
     }
     
     public void ForgotPassword(ForgotPasswordRequest model, string origin)

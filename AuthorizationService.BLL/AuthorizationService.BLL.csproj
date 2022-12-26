@@ -15,6 +15,8 @@
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
       <PackageReference Include="BCrypt.Net" Version="0.1.0" />
       <PackageReference Include="MailKit" Version="3.4.3" />
+      <PackageReference Include="MassTransit" Version="8.0.10-develop.714" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.10-develop.714" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
       <PackageReference Include="MimeKit" Version="3.4.3" />

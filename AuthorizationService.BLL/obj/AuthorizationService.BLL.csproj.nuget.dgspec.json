@@ -60,6 +60,14 @@
               "target": "Package",
               "version": "[3.4.3, )"
             },
+            "MassTransit": {
+              "target": "Package",
+              "version": "[8.0.10-develop.714, )"
+            },
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[8.0.10-develop.714, )"
+            },
             "Microsoft.AspNetCore.Mvc.Core": {
               "target": "Package",
               "version": "[2.2.5, )"

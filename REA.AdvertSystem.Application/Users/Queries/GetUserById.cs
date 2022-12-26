@@ -14,19 +14,19 @@ public record GetUserById : IRequest<User>
 
 public class GetUserByIdHandler : IRequestHandler<GetUserById, User>
 {
-    private IMongoCollection<User> _advert { get; }
+    private IMongoCollection<User> _user { get; }
 
     private IMapper _mapper { get; }
 
     public GetUserByIdHandler(IAgencyDbConnection context, IMapper mapper)
     {
-        _advert = context.ConnectToMongo<User>("Users");
+        _user = context.ConnectToMongo<User>("Users");
         _mapper = mapper;
     }
 
     public async Task<User> Handle(GetUserById query, CancellationToken cancellationToken)   
     {
-        var result = await _advert.Find(x => x.Id == query.Id).ToListAsync();
+        var result = await _user.Find(x => x.Id == query.Id).ToListAsync();
 
         if(result.Count == 0) throw new NotFoundException("User", query.Id);
 

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using REA.AdvertSystem.Application.Common.DTO.AdvertDTO;
+using REA.AdvertSystem.Application.Common.DTO.UserDTO;
 using REA.AdvertSystem.Application.Users.Commands;
 using REA.AdvertSystem.Application.Users.Queries;
 
@@ -11,7 +12,7 @@ namespace REA.AdvertSystem.Controllers;
 public class UserController : ControllerBase
 {
     private IMediator _mediator = null!;
-    private IMediator Mediator => _mediator;
+    protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
 
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -26,7 +27,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpGet("{id}")]
-    public async Task<ActionResult<AdvertResponse>> GetById(string id)
+    public async Task<ActionResult<UserResponse>> GetById(string id)
     {
         try
         {

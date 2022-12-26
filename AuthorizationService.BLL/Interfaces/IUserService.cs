@@ -9,7 +9,7 @@ public interface IUserService
     Task<AuthenticateResponse> RefreshToken(string token, string ipAddress);
     void RevokeToken(string token, string ipAddress);
     Task Register(RegisterRequest model, string origin);
-    void VerifyEmail(string token);
+    Task VerifyEmail(string token);
     void ForgotPassword(ForgotPasswordRequest model, string origin);
     void ValidateResetToken(ValidateResetTokenRequest model);
     void ResetPassword(ResetPasswordRequest model);

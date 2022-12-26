@@ -25,7 +25,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, strin
             Photo = request.Photo
         };
 
-        await _user.InsertOneAsync(entity);
+        await _user.InsertOneAsync(entity, cancellationToken: cancellationToken);
 
 
         return entity.Id;

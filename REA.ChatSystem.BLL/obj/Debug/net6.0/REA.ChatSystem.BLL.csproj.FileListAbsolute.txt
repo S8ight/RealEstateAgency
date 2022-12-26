@@ -13,3 +13,7 @@ D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSy
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\refint\REA.ChatSystem.BLL.dll
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\REA.ChatSystem.BLL.pdb
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\obj\Debug\net6.0\ref\REA.ChatSystem.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\AuthorizationService.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\AuthorizationService.DAL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\AuthorizationService.BLL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem.BLL\bin\Debug\net6.0\AuthorizationService.DAL.pdb

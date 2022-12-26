@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using AuthorizationService.BLL.DTO.Request;
 using AutoMapper;
 using REA.AdvertSystem.Application.Common.DTO.AdvertDTO;
 using REA.AdvertSystem.Application.Common.DTO.PhotoListDTO;
@@ -19,6 +20,8 @@ namespace REA.AdvertSystem.Application.Common.Mapping
             CreateMap<PhotoList, PhotoResponse>();
             CreateMap<SaveList, SaveListResponse>();
             CreateMap<User, CreateUserCommand>();
+            CreateMap<CreateUserCommand, QueueRequest>();
+            CreateMap<QueueRequest, CreateUserCommand>();
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

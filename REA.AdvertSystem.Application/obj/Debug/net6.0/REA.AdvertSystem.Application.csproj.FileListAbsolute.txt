@@ -20,3 +20,7 @@ D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\DiscountGrpcService.exe
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\DiscountGrpcService.dll
 D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\DiscountGrpcService.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\AuthorizationService.BLL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\AuthorizationService.DAL.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\AuthorizationService.BLL.pdb
+D:\Knowledge\OOP\RealEstateAgency\REA.AdvertSystem.Application\bin\Debug\net6.0\AuthorizationService.DAL.pdb

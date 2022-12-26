@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AuthorizationService.BLL.DTO.Request;
+using AutoMapper;
 using REA.ChatSystem.BLL.DTO.Request;
 using REA.ChatSystem.BLL.DTO.Response;
 using REA.ChatSystem.DAL.Models;

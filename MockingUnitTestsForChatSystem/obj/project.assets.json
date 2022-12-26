@@ -109,6 +109,19 @@
           }
         }
       },
+      "BCrypt.Net/0.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/BCrypt.Net.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net35/BCrypt.Net.dll": {
+            "related": ".XML"
+          }
+        }
+      },
       "Castle.Core/5.1.0": {
         "type": "package",
         "dependencies": {
@@ -208,10 +221,10 @@
           }
         }
       },
-      "MassTransit/8.0.10-develop.692": {
+      "MassTransit/8.0.10-develop.714": {
         "type": "package",
         "dependencies": {
-          "MassTransit.Abstractions": "8.0.10-develop.692",
+          "MassTransit.Abstractions": "8.0.10-develop.714",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.18",
           "Microsoft.Extensions.Diagnostics.HealthChecks": "3.1.18",
           "Microsoft.Extensions.Hosting.Abstractions": "3.1.18",
@@ -234,7 +247,7 @@
           }
         }
       },
-      "MassTransit.Abstractions/8.0.10-develop.692": {
+      "MassTransit.Abstractions/8.0.10-develop.714": {
         "type": "package",
         "compile": {
           "lib/net6.0/MassTransit.Abstractions.dll": {
@@ -247,10 +260,10 @@
           }
         }
       },
-      "MassTransit.RabbitMQ/8.0.10-develop.692": {
+      "MassTransit.RabbitMQ/8.0.10-develop.714": {
         "type": "package",
         "dependencies": {
-          "MassTransit": "8.0.10-develop.692",
+          "MassTransit": "8.0.10-develop.714",
           "RabbitMQ.Client": "6.4.0"
         },
         "compile": {
@@ -711,7 +724,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Mvc.Core/2.2.0": {
+      "Microsoft.AspNetCore.Mvc.Core/2.2.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.Core": "2.2.0",
@@ -5514,6 +5527,42 @@
           "build/netcoreapp2.1/xunit.runner.visualstudio.props": {}
         }
       },
+      "AuthorizationService.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AuthorizationService.DAL": "1.0.0",
+          "AutoMapper": "12.0.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
+          "BCrypt.Net": "0.1.0",
+          "MailKit": "3.4.3",
+          "MassTransit": "8.0.10-develop.714",
+          "MassTransit.RabbitMQ": "8.0.10-develop.714",
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
+          "Microsoft.AspNetCore.Mvc.Formatters.Json": "2.2.0",
+          "MimeKit": "3.4.3"
+        },
+        "compile": {
+          "bin/placeholder/AuthorizationService.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AuthorizationService.BLL.dll": {}
+        }
+      },
+      "AuthorizationService.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.4",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4"
+        },
+        "compile": {
+          "bin/placeholder/AuthorizationService.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AuthorizationService.DAL.dll": {}
+        }
+      },
       "REA.AuthorizationSystem.BLL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -5557,8 +5606,8 @@
         "dependencies": {
           "AutoMapper": "12.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
-          "MassTransit": "8.0.10-develop.692",
-          "MassTransit.RabbitMQ": "8.0.10-develop.692",
+          "MassTransit": "8.0.10-develop.714",
+          "MassTransit.RabbitMQ": "8.0.10-develop.714",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.4",
           "Microsoft.AspNetCore.SignalR.Common": "7.0.0",
           "Microsoft.Data.SqlClient": "5.0.1",
@@ -5581,9 +5630,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "AuthorizationService.BLL": "1.0.0",
           "AutoMapper": "12.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
-          "MassTransit": "8.0.10-develop.692",
+          "MassTransit": "8.0.10-develop.714",
           "Microsoft.AspNetCore.SignalR": "1.1.0",
           "Microsoft.AspNetCore.SignalR.Common": "7.0.0",
           "REA.ChatSystem.DAL": "1.0.0"
@@ -5716,6 +5766,19 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "BCrypt.Net/0.1.0": {
+      "sha512": "sST2w361Dxt9GGMfpOTiK50wXGV64Ybb1hiX3xjEWnhVYZNF43NuySGwADJa7X1R+bA53NsFR+tuDxcYiJeIOA==",
+      "type": "package",
+      "path": "bcrypt.net/0.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bcrypt.net.0.1.0.nupkg.sha512",
+        "bcrypt.net.nuspec",
+        "lib/net35/BCrypt.Net.XML",
+        "lib/net35/BCrypt.Net.dll"
       ]
     },
     "Castle.Core/5.1.0": {
@@ -5967,10 +6030,10 @@
         "mailkit.nuspec"
       ]
     },
-    "MassTransit/8.0.10-develop.692": {
-      "sha512": "TgQzW2kntBtq757D1/F9qFvvNzzTyhBVp0Sc255nUhSnZgCxLLgmEzNr26mgqnbgNA8NDbJMHCeBwWeInQufPQ==",
+    "MassTransit/8.0.10-develop.714": {
+      "sha512": "wZOG02JLhO+amRHkxQhyEu7k3TdX69E7wCy3slOl+eIl6fvS60qvQi+Cm+Mz+0dzEHA50C8qquwYCv6xH/puYg==",
       "type": "package",
-      "path": "masstransit/8.0.10-develop.692",
+      "path": "masstransit/8.0.10-develop.714",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5982,15 +6045,15 @@
         "lib/netstandard2.0/MassTransit.xml",
         "lib/netstandard2.1/MassTransit.dll",
         "lib/netstandard2.1/MassTransit.xml",
-        "masstransit.8.0.10-develop.692.nupkg.sha512",
+        "masstransit.8.0.10-develop.714.nupkg.sha512",
         "masstransit.nuspec",
         "mt-logo-small.png"
       ]
     },
-    "MassTransit.Abstractions/8.0.10-develop.692": {
-      "sha512": "heYiAu5waT0DHTvCIOw6T/4WrRHMoKut1Ukwf3DFiX6MZb8UcKqetOSM4zjm5L8nP82MsMNbnftOhPwHmhxldw==",
+    "MassTransit.Abstractions/8.0.10-develop.714": {
+      "sha512": "rQqVH6Xa8uE3jX9PcWRon/ZEmwVjwkmM4Gr+S4aC4xHEOlGzyhk5wEirKgFlr+VpJrvd3A/YvkTEqmQ7e3YQzA==",
       "type": "package",
-      "path": "masstransit.abstractions/8.0.10-develop.692",
+      "path": "masstransit.abstractions/8.0.10-develop.714",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6002,15 +6065,15 @@
         "lib/netstandard2.0/MassTransit.Abstractions.xml",
         "lib/netstandard2.1/MassTransit.Abstractions.dll",
         "lib/netstandard2.1/MassTransit.Abstractions.xml",
-        "masstransit.abstractions.8.0.10-develop.692.nupkg.sha512",
+        "masstransit.abstractions.8.0.10-develop.714.nupkg.sha512",
         "masstransit.abstractions.nuspec",
         "mt-logo-small.png"
       ]
     },
-    "MassTransit.RabbitMQ/8.0.10-develop.692": {
-      "sha512": "1+3SNk1OIJcLOA7x5x4Ej9fIDazNs6idXtefrYf3DNA9gcJfE6tI2CPoEX1U1vMNWRBCKEAor5/Fv/XawjcH/w==",
+    "MassTransit.RabbitMQ/8.0.10-develop.714": {
+      "sha512": "wE6tkleWe2+t/hsP9P3m4MLRBqTpxEcEcNwgDQfzEZc9hu8abuFSqPH+YeClGEOn0GQhSk+XF8uVRplACeUgPg==",
       "type": "package",
-      "path": "masstransit.rabbitmq/8.0.10-develop.692",
+      "path": "masstransit.rabbitmq/8.0.10-develop.714",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6022,7 +6085,7 @@
         "lib/netstandard2.0/MassTransit.RabbitMqTransport.xml",
         "lib/netstandard2.1/MassTransit.RabbitMqTransport.dll",
         "lib/netstandard2.1/MassTransit.RabbitMqTransport.xml",
-        "masstransit.rabbitmq.8.0.10-develop.692.nupkg.sha512",
+        "masstransit.rabbitmq.8.0.10-develop.714.nupkg.sha512",
         "masstransit.rabbitmq.nuspec",
         "mt-logo-small.png"
       ]
@@ -6396,16 +6459,16 @@
         "microsoft.aspnetcore.mvc.abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Mvc.Core/2.2.0": {
-      "sha512": "ALiY4a6BYsghw8PT5+VU593Kqp911U3w9f/dH9/ZoI3ezDsDAGiObqPu/HP1oXK80Ceu0XdQ3F0bx5AXBeuN/Q==",
+    "Microsoft.AspNetCore.Mvc.Core/2.2.5": {
+      "sha512": "/8sr8ixIUD57UFwUntha9bOwex7/AkZfdk1f9oNJG1Ek7p/uuKVa7fuHmYZpQOf35Oxrt+2Ku4WPwMSbNxOuWg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.mvc.core/2.2.0",
+      "path": "microsoft.aspnetcore.mvc.core/2.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Core.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Core.xml",
-        "microsoft.aspnetcore.mvc.core.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.core.2.2.5.nupkg.sha512",
         "microsoft.aspnetcore.mvc.core.nuspec"
       ]
     },
@@ -14870,6 +14933,16 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
+    "AuthorizationService.BLL/1.0.0": {
+      "type": "project",
+      "path": "../AuthorizationService.BLL/AuthorizationService.BLL.csproj",
+      "msbuildProject": "../AuthorizationService.BLL/AuthorizationService.BLL.csproj"
+    },
+    "AuthorizationService.DAL/1.0.0": {
+      "type": "project",
+      "path": "../AuthorizationService.DAL/AuthorizationService.DAL.csproj",
+      "msbuildProject": "../AuthorizationService.DAL/AuthorizationService.DAL.csproj"
+    },
     "REA.AuthorizationSystem.BLL/1.0.0": {
       "type": "project",
       "path": "../REA.AuthorizationSystem.BLL/REA.AuthorizationSystem.BLL.csproj",
@@ -15046,5 +15119,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BCrypt.Net 0.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "BCrypt.Net",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

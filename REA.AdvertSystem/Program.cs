@@ -22,6 +22,22 @@ builder.Services.AddSingleton<IMongoClient>(s =>
 
 builder.Services.AddScoped<IAgencyDbConnection, AgencyDbConnection>();
 
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<AdvertUserConsumer>();
+  
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("rabbitmq://rabbitmq:5672");
+  
+        cfg.ReceiveEndpoint("advert-user-queue", ep =>
+        {
+            ep.PrefetchCount = 20;
+            ep.ConfigureConsumer<AdvertUserConsumer>(context);
+        });
+    });
+});
+
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
 (g =>
 {
@@ -49,43 +65,8 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "RedisAdvertsProject";
 });
 
-// builder.Services.AddMassTransit(x =>
-// {
-//     x.AddConsumer<UserConsumer>();
-//  
-//     x.UsingRabbitMq((context, cfg) =>
-//     {
-//         cfg.Host("rabbitmq://localhost:5672");
-//  
-//         cfg.ReceiveEndpoint("advert-user-queue", ep =>
-//         {
-//             ep.PrefetchCount = 20;
-//             ep.ConfigureConsumer<UserConsumer>(context);
-//         });
-//     });
-// });
-
 //builder.Services.AddHostedService<User>();
 
-
-// builder.Services.AddMassTransit(x =>
-// {
-//     x.AddConsumer<UserConsumer>();
-//     x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
-//     {
-//         cfg.Host(new Uri("rabbitmq://localhost:1334"),h =>
-//         {
-//             h.Username("guest");
-//             h.Password("guest");
-//         });
-//         cfg.ReceiveEndpoint("userQueue", ep =>
-//         {
-//             ep.PrefetchCount = 16;
-//             ep.UseMessageRetry(r => r.Interval(2, 100));
-//             ep.ConfigureConsumer<UserConsumer>(provider);
-//         });
-//     }));
-// });
 
 builder.Services.AddControllers();
 
