@@ -1,4 +1,5 @@
 using System.Data;
+using System.Reflection;
 using MassTransit;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -8,9 +9,13 @@ using REA.ChatSystem.BLL.Services;
 using REA.ChatSystem.DAL.Context;
 using REA.ChatSystem.DAL.Interfaces;
 using REA.ChatSystem.DAL.Repositories;
+using Serilog;
+using Serilog.Sinks.Elasticsearch;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog();
+ConfigureLogger();
 
 builder.Services.AddControllers();
 
@@ -88,3 +93,32 @@ app.MapControllers();
 
 app.Run();
 
+#region helper
+void ConfigureLogger()
+{
+    var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+    var configuration = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        .Build();
+
+    Log.Logger = new LoggerConfiguration()
+        .Enrich.FromLogContext()
+        .WriteTo.Debug()
+        .WriteTo.Console()
+        .WriteTo.Elasticsearch(ConfigureElasticsearchSinkOptions(configuration, env))
+        .CreateLogger();
+}
+
+ElasticsearchSinkOptions ConfigureElasticsearchSinkOptions(IConfiguration configuration, string env)
+{
+    return new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
+    {
+        AutoRegisterTemplate = true,
+        IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower()}-{env.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+
+    };
+}
+
+
+#endregion

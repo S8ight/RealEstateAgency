@@ -9,37 +9,71 @@ namespace REA.ChatSystem.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly ILogger<UserController> _logger;
         
-    public UserController(IUserService userService)
+    public UserController(IUserService userService, ILogger<UserController> logger)
     {
         _userService = userService;
+        _logger = logger;
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(string id)
     {
-        var data = await _userService.GetAsync(id);
-        return Ok(data);
+        try
+        {
+            var data = await _userService.GetAsync(id);
+            return Ok(data);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] UserRequest request)
     {
-        var data = await _userService.AddAsync(request);
-        return Ok(data);
+        try
+        {
+            var data = await _userService.AddAsync(request);
+            return Ok(data);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return BadRequest(e.Message);
+        }
     }
     
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UserRequest request)
     {
-        await _userService.ReplaceAsync(request);
-        return Ok();
+        try
+        {
+            await _userService.ReplaceAsync(request);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return BadRequest(e.Message);
+        }
     }
         
     [HttpDelete]
     public async Task<IActionResult> Delete(string id)
     {
-        await _userService.DeleteAsync(id);
-        return Ok();
+        try
+        {
+            await _userService.DeleteAsync(id);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message);
+            return BadRequest(e.Message);
+        }
     }
 }

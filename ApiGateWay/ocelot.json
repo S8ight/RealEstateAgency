@@ -1,3 +1,358 @@
 ﻿{
-    
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Chat",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ChatSystem/Chat",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Chat/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ChatSystem/Chat/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Message",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ChatSystem/Message",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Message/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ChatSystem/Message/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Message/{chatId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ChatSystem/Message/{chatId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ChatSystem/User",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ChatSystem/User/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Advert",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AdvertSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AdvertSystem/Advert",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Advert/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AdvertSystem/Advert/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PhotoList",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AdvertSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AdvertSystem/PhotoList",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PhotoList/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AdvertSystem/PhotoList/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/SaveList",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AdvertSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AdvertSystem/SaveList",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/SaveList/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AdvertSystem/SaveList/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AdvertSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AdvertSystem/User",
+      "UpstreamHttpMethod": [ "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.ChatSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AdvertSystem/User/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/authenticate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/authenticate",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/refresh-token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/refresh-token",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/revoke-token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/revoke-token",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/register",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/verify-email",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/verify-email",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/forgot-password",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/forgot-password",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/validate-reset-token",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/validate-reset-token",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/reset-password",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/reset-password",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "REA.AuthorizationSystem",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "DiscountService",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/DiscountService/Discount/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "DiscountService",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/DiscountService/Discount",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8088"
+  }
 }

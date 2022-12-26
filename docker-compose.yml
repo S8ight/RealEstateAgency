@@ -13,17 +13,6 @@ services:
       - ./REA.mssql_data:/log:/var/opt/mssql/log
       - ./REA.mssql_data:/secrets:/var/opt/mssql/secrets
 
-  # MongoDataBase:
-  #   container_name: MongoDataBase
-  #   image: mongo
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: root
-  #     MONGO_INITDB_ROOT_PASSWORD: mongoDB123
-  #   ports: 
-  #     - 1338:27017
-  #   volumes:
-  #       - ./REA.mongo_data:/data/db
-
   MongoDataBase:
     container_name: MongoDataBase
     image: mongo
@@ -88,7 +77,6 @@ services:
       - 1553:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      # - "AdvertDatabase:ConnectionString=mongodb://root:mongoDB123@127.0.0.1:1338"
       - "AdvertDatabase:ConnectionString=mongodb://MongoDataBase:27017"
       - "ConnectionStrings:RabbitMQConnection=rabbitmq://rabbitmq:5672"
       - "ConnectionStrings:Redis=RedisDataBase://RedisDataBase:1335"
@@ -117,3 +105,33 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:DefaultConnection=Data Source=MSSQLDataBase,1337;Initial Catalog=AgencyUserSystem;User Id=SA; Password=msSQL123; TrustServerCertificate=True;"
       - "ConnectionStrings:RabbitMQConnection=rabbitmq://rabbitmq:5672;"
+
+  ApiGateWay:
+    container_name: ApiGateWay
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateWay/Dockerfile
+    ports:
+      - 8088:80
+
+  ElasticSearch:
+    container_name: ElasticSearch
+    image: elasticsearch:7.16.1
+    environment:
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xms512m"
+    ports:
+      - 9200:9200
+
+  Kibana:
+    container_name: Kibana
+    image: kibana:7.16.1
+    depends_on:
+      - ElasticSearch
+    environment:
+      - ELASTICSEARCH_URL=http://localhost:9200/
+    ports:
+      - 5601:5601

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using REA.ChatSystem.BLL.DTO.Request;
 using REA.ChatSystem.BLL.DTO.Response;
 using REA.ChatSystem.BLL.Interfaces;
@@ -11,11 +12,13 @@ namespace REA.ChatSystem.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ILogger<ChatService> _logger;
 
-        public ChatService(IUnitOfWork unitOfWork, IMapper mapper)
+        public ChatService(IUnitOfWork unitOfWork, IMapper mapper, ILogger<ChatService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _logger = logger;
         }
         public async Task<IEnumerable<ChatResponse>> GetAllAsync()
         {
@@ -26,7 +29,7 @@ namespace REA.ChatSystem.BLL.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                _logger.LogError(e.Message);
                 throw;
             }
         }
@@ -47,21 +50,30 @@ namespace REA.ChatSystem.BLL.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger.LogError(e.Message);
                 throw;
             }
         }
 
         public async Task<string> AddAsync(ChatRequest request)
         {
-            var chat = _mapper.Map<ChatRequest, Chat>(request);
-            var newChat = await _unitOfWork.ChatRepository.AddAsync(chat);
-            if (newChat == String.Empty)
+            try
             {
-                throw new ArgumentException("Not possible to create chat with this users");
+                var chat = _mapper.Map<ChatRequest, Chat>(request);
+                var newChat = await _unitOfWork.ChatRepository.AddAsync(chat);
+                if (newChat == String.Empty)
+                {
+                    throw new ArgumentException("Not possible to create chat with this users");
+                }
+
+                _unitOfWork.Commit();
+                return newChat;
             }
-            _unitOfWork.Commit();
-            return newChat;
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                throw;
+            }
         }
 
         public async Task DeleteAsync(string id)
@@ -73,7 +85,7 @@ namespace REA.ChatSystem.BLL.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger.LogError(e.Message);
                 throw;
             }
         }

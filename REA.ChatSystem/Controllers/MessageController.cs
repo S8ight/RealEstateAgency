@@ -9,9 +9,11 @@ namespace REA.ChatSystem.Controllers;
 public class MessageController : ControllerBase
 {
     private readonly IMessageService _messageService;
-    public MessageController(IMessageService messageService)
+    private readonly ILogger<MessageController> _logger;
+    public MessageController(IMessageService messageService, ILogger<MessageController> logger)
     {
         _messageService = messageService;
+        _logger = logger;
     }
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -23,6 +25,7 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }
@@ -37,6 +40,7 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }
@@ -51,6 +55,7 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }
@@ -65,6 +70,7 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }
@@ -78,6 +84,7 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }
@@ -91,6 +98,7 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }

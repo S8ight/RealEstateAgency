@@ -8,10 +8,12 @@ namespace REA.ChatSystem.Controllers;
 [ApiController]
 public class ChatController : ControllerBase
 {
+    private readonly ILogger<ChatController> _logger;
     private readonly IChatService _chatService;
-    public ChatController(IChatService chatService)
+    public ChatController(IChatService chatService, ILogger<ChatController> logger)
     {
         _chatService = chatService;
+        _logger = logger;
     }
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -32,6 +34,7 @@ public class ChatController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }
@@ -46,6 +49,7 @@ public class ChatController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }
@@ -60,6 +64,7 @@ public class ChatController : ControllerBase
         }
         catch (Exception e)
         {
+            _logger.LogError(e.Message);
             return BadRequest(e.Message);
         }
     }
