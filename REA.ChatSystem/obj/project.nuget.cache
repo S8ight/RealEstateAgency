@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7n6jxQaQOkBo2pmr71lAMTqtfYVBe+1SGRpxCc4NUPUQ2r1ue9I/lJEmcUZah+ypx+hWl+C64odRgMvAyZXKug==",
+  "dgSpecHash": "x72QTwJjfv19+QQDH/RfS3PfvjFVhvJtZqHKrksSjAmwy0x7ihXWKIUVU4YbzB6kkEL5Ji8hgEWP0DVFeHpJrQ==",
   "success": true,
   "projectFilePath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.ChatSystem\\REA.ChatSystem.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,7 @@
     "C:\\Users\\fsv18\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.4\\microsoft.aspnetcore.authentication.jwtbearer.6.0.4.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.2.0\\microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\7.0.0\\microsoft.aspnetcore.connections.abstractions.7.0.0.nupkg.sha512",

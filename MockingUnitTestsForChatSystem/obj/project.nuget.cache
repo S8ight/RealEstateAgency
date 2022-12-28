@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "37Rq7X0cRze4ALZd6az7orh9FT+CVU37tXLFeQH6KitXF8RIU5RZc8GoAcG3ebAkIVgjMt3vUF7Otjn2Sy9laA==",
+  "dgSpecHash": "iRGHHkgZdE6u82HB7YXGAlYBVYLlpzTWOcexyGxOEsbK8jLqWNqgfVTyQ6vta0Q9UUpw603t9vtlffFjFZBLEw==",
   "success": true,
   "projectFilePath": "D:\\Knowledge\\OOP\\RealEstateAgency\\MockingUnitTestsForChatSystem\\MockingUnitTestsForChatSystem.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.4\\microsoft.aspnetcore.authentication.jwtbearer.6.0.4.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.authorization.policy\\2.2.0\\microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\7.0.0\\microsoft.aspnetcore.connections.abstractions.7.0.0.nupkg.sha512",

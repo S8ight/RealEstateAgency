@@ -151,9 +151,9 @@ public class UserService : IUserService
         
         var queueUser = _mapper.Map<QueueRequest>(user);
         queueUser.Photo = null;
+        await _bus.Publish(queueUser);
         // var endpoint = await _bus.GetSendEndpoint(new Uri("exchange:chat-user-queue"));
         // await endpoint.Send(queueUser);
-        await _bus.Publish(queueUser);
     }
     
     public void ForgotPassword(ForgotPasswordRequest model, string origin)

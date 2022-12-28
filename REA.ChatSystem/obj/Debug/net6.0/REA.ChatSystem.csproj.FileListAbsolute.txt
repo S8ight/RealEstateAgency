@@ -327,3 +327,4 @@ D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\Serilog.Sinks.
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\Serilog.Sinks.Elasticsearch.dll
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\Serilog.Sinks.File.dll
 D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\Serilog.Sinks.PeriodicBatching.dll
+D:\Knowledge\OOP\RealEstateAgency\REA.ChatSystem\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

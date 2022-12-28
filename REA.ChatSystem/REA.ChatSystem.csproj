@@ -12,6 +12,7 @@
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
         <PackageReference Include="MassTransit" Version="8.0.10-develop.714" />
         <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.10-develop.714" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.0" />
         <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />

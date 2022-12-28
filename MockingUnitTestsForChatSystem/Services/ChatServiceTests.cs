@@ -1,4 +1,4 @@
-﻿using Autofac.Extras.Moq;
+﻿/*using Autofac.Extras.Moq;
 using AutoMapper;
 using FluentAssertions;
 using Moq;
@@ -125,4 +125,4 @@ public class ChatServiceTests
         return chats;
     }
     
-}
+}*/

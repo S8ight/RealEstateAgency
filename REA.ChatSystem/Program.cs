@@ -1,6 +1,7 @@
 using System.Data;
 using System.Reflection;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using REA.ChatSystem.BLL.Hubs;
@@ -69,6 +70,24 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.Authority = "https://localhost:7287"; 
+    o.Audience = "myresourceapi";
+    o.RequireHttpsMetadata = false;
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    //options.AddPolicy("PublicSecure", policy => policy.RequireClaim("client_id", "secret_client_id"));
+    options.AddPolicy("UserSecure", policy => policy.RequireClaim("roleType", "CanReadData"));
+    options.AddPolicy("AdminSecure", policy => policy.RequireClaim("roleType", "CanUpdateData"));
+});
+
 var app = builder.Build();
 
 
@@ -80,6 +99,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>

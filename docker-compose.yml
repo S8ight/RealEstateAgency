@@ -81,18 +81,6 @@ services:
       - "ConnectionStrings:RabbitMQConnection=rabbitmq://rabbitmq:5672"
       - "ConnectionStrings:Redis=RedisDataBase://RedisDataBase:1335"
 
-  # DiscountService:
-  #   container_name: DiscountService
-  #   image: ${DOCKER_REGISTRY-}discountservice
-  #   build: 
-  #     context: .
-  #     dockerfile: DiscountService/Dockerfile
-  #   ports:
-  #     - 1559:80
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - "ConnectionStrings:Redis=RedisDataBase://RedisDataBase:1335"
-
   REA.AuthorizationSystem:
     container_name: REA.AuthorizationSystem
     image: ${DOCKER_REGISTRY-}authorizationsystem

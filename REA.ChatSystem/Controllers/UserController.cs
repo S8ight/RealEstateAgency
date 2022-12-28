@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using REA.ChatSystem.BLL.DTO.Request;
 using REA.ChatSystem.BLL.Interfaces;
 
@@ -17,6 +18,7 @@ public class UserController : ControllerBase
         _logger = logger;
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(string id)
     {
@@ -32,6 +34,7 @@ public class UserController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] UserRequest request)
     {
@@ -47,6 +50,7 @@ public class UserController : ControllerBase
         }
     }
     
+    [Authorize]
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UserRequest request)
     {
@@ -62,6 +66,7 @@ public class UserController : ControllerBase
         }
     }
         
+    [Authorize]
     [HttpDelete]
     public async Task<IActionResult> Delete(string id)
     {

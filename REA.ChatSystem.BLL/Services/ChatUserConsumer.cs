@@ -30,7 +30,7 @@ public class ChatUserConsumer : IConsumer<QueueRequest>
         
             await _userRepository.AddAsync(user);
             
-            _logger.LogInformation("Added new user");
+            _logger.LogInformation("Added new user");   
         }
         catch (Exception e)
         {

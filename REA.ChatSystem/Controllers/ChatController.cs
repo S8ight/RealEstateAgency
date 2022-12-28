@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using REA.ChatSystem.BLL.DTO.Request;
 using REA.ChatSystem.BLL.Interfaces;
@@ -15,6 +16,7 @@ public class ChatController : ControllerBase
         _chatService = chatService;
         _logger = logger;
     }
+    
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -23,6 +25,7 @@ public class ChatController : ControllerBase
         return Ok(data);
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(string id)
     {
@@ -39,6 +42,7 @@ public class ChatController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] ChatRequest request)
     {
@@ -54,6 +58,7 @@ public class ChatController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpDelete]
     public async Task<IActionResult> Delete(string id)
     {
