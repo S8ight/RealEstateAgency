@@ -44,8 +44,8 @@ public class AdvertController : ControllerBase
 
             foreach (var advert in adverts.Items)
             {
-                var newPrice = _discountServiceGrpc.GetDiscount(advert.AdvertID, advert.Price);
-                advert.Price = newPrice.Result.CalculatedPrice;
+                var newPrice = await _discountServiceGrpc.GetDiscount(advert.AdvertID, advert.Price);
+                advert.Price = newPrice.CalculatedPrice;
             }
             return Ok(adverts);
         }
