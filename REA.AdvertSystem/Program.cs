@@ -17,13 +17,10 @@ using REA.AdvertSystem.Infrastructure.DataAccess;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddSingleton<IMongoClient>(s =>
-        new MongoClient(builder.Configuration.GetValue<string>("AdvertDatabase:ConnectionString")));
-
-builder.Services.AddScoped<IAgencyDbConnection, AgencyDbConnection>();
-
 builder.Services.Configure<MongoDatabaseSettings>(
     builder.Configuration.GetSection("AdvertDatabase"));
+
+builder.Services.AddScoped<IAgencyDbConnection, AgencyDbConnection>();
 
 builder.Services.AddMassTransit(x =>
 {
@@ -31,7 +28,7 @@ builder.Services.AddMassTransit(x =>
   
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("rabbitmq://rabbitmq:5672");
+        cfg.Host(builder.Configuration["ConnectionStrings:RabbitMQConnection"]);
   
         cfg.ReceiveEndpoint("advert-user-queue", ep =>
         {
@@ -44,7 +41,7 @@ builder.Services.AddMassTransit(x =>
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
 (g =>
 {
-    g.Address = new Uri( /*builder.Configuration["ConnectionStrings:Grpc"]*/"http://localhost:7180");
+    g.Address = new Uri( builder.Configuration["ConnectionStrings:Grpc"]);
 });
 builder.Services.AddScoped<DiscountServiceGrpc>();
 
@@ -52,9 +49,8 @@ builder.Services.AddScoped<DiscountServiceGrpc>();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddValidatorsFromAssembly(typeof(ConfigureServices).Assembly);
-builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddMediatR(typeof(CreateAdvertCommand).GetTypeInfo().Assembly);
 builder.Services.AddMediatR(typeof(GetAdvertsPaginationList).GetTypeInfo().Assembly);
@@ -64,11 +60,9 @@ builder.Services.AddMediatR(typeof(UpdateAdvertCommand).GetTypeInfo().Assembly);
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.Configuration = builder.Configuration["ConnectionStrings:Redis"];
     options.InstanceName = "RedisAdvertsProject";
 });
-
-//builder.Services.AddHostedService<User>();
 
 builder.Services.AddControllers();
 
@@ -77,14 +71,14 @@ builder.Services.AddSwaggerGen();
 
 
 
-var MyAllowedOrigins = "_myAllowedOrigins";
+string myAllowedOrigins = "_myAllowedOrigins";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowedOrigins,
-                          builder =>
+    options.AddPolicy(myAllowedOrigins,
+                          corsPolicyBuilder =>
                           {
-                              builder.WithOrigins("http://localhost:3000")
+                              corsPolicyBuilder.WithOrigins("http://localhost:3000")
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod();
                           });
@@ -92,7 +86,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.UseCors(MyAllowedOrigins);
+app.UseCors(myAllowedOrigins);
 
 app.UseHttpsRedirection();
 
