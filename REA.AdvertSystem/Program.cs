@@ -22,6 +22,9 @@ builder.Services.AddSingleton<IMongoClient>(s =>
 
 builder.Services.AddScoped<IAgencyDbConnection, AgencyDbConnection>();
 
+builder.Services.Configure<MongoDatabaseSettings>(
+    builder.Configuration.GetSection("AdvertDatabase"));
+
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<AdvertUserConsumer>();
@@ -66,7 +69,6 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 
 //builder.Services.AddHostedService<User>();
-
 
 builder.Services.AddControllers();
 
