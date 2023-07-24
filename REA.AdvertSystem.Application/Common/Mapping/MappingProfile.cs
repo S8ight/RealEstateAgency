@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using AuthorizationService.BLL.DTO.Request;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore.Storage;
 using REA.AdvertSystem.Application.Common.DTO.AdvertDTO;
 using REA.AdvertSystem.Application.Common.DTO.PhotoListDTO;
 using REA.AdvertSystem.Application.Common.DTO.SaveListDTO;
@@ -14,7 +15,11 @@ namespace REA.AdvertSystem.Application.Common.Mapping
     {
         public MappingProfile()
         {
-            ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+            DtoMapping();
+        }
+
+        private void DtoMapping()
+        {
             CreateMap<Advert, AdvertResponse>();
             CreateMap<PaginatedList<Advert>, PaginatedList<AdvertResponse>>();
             CreateMap<PhotoList, PhotoResponse>();
@@ -22,22 +27,6 @@ namespace REA.AdvertSystem.Application.Common.Mapping
             CreateMap<User, CreateUserCommand>();
             CreateMap<CreateUserCommand, QueueRequest>();
             CreateMap<QueueRequest, CreateUserCommand>();
-        }
-
-        private void ApplyMappingsFromAssembly(Assembly assembly)
-        {
-
-            var types = assembly.GetExportedTypes()
-                .Where(t => t.GetInterfaces().Any(i =>
-                    i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
-                .ToList();
-
-            foreach (var type in types)
-            {
-                var instance = Activator.CreateInstance(type);
-                var methodInfo = type.GetMethod("Mapping");
-                methodInfo?.Invoke(instance, new object[] { this });
-            }
         }
     }
 }
