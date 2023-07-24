@@ -65,8 +65,8 @@ public class AdvertController : ControllerBase
         {
             GetAdvertsById query = new GetAdvertsById() { Id = id };
             var advert = await Mediator.Send(query);
-            var newPrice = _discountServiceGrpc.GetDiscount(id, advert.Price);
-            advert.Price = newPrice.Result.CalculatedPrice;
+            var newPrice = await _discountServiceGrpc.GetDiscount(id, advert.Price);
+            advert.Price = newPrice.CalculatedPrice;
             return Ok(advert);
         }
         catch (Exception ex)
