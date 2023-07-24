@@ -7,11 +7,11 @@ namespace REA.AdvertSystem.Application.SaveLists.Commands
 {
     public class UpdateSaveListCommandHandler : IRequestHandler<UpdateSaveListCommand, string>
     {
-        private IMongoCollection<SaveList> _saveList { get; }
+        private IMongoCollection<SaveList> SaveList { get; }
 
         public UpdateSaveListCommandHandler(IAgencyDbConnection connection)
         {
-            _saveList = connection.ConnectToMongo<SaveList>("SaveList");
+            SaveList = connection.ConnectToMongo<SaveList>("SaveList");
         }
 
         public async Task<string> Handle(UpdateSaveListCommand request, CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ namespace REA.AdvertSystem.Application.SaveLists.Commands
                 UserID = request.UserID
             };
 
-            await _saveList.ReplaceOneAsync(Builders<SaveList>.Filter.Eq("_id", request.ListID), newList);
+            await SaveList.ReplaceOneAsync(Builders<SaveList>.Filter.Eq("_id", request.ListID), newList);
 
             return newList.ListID;
         }

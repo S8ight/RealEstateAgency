@@ -9,6 +9,7 @@ namespace REA.AdvertSystem.Application.Adverts.Commands.AdvertValidation
 {
     public class UpdateAdvertCommandValidator : AbstractValidator<CreateAdvertCommand>
     {
+        [Obsolete("Obsolete")]
         public UpdateAdvertCommandValidator()
         {
             RuleFor(a => a.Name)

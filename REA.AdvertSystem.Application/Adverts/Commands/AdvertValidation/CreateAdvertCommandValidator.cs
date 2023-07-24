@@ -9,6 +9,7 @@ namespace REA.AdvertSystem.Application.Adverts.Commands.AdvertValidation
 {
     public class CreateAdvertCommandValidator : AbstractValidator<CreateAdvertCommand>
     {
+        [Obsolete("Obsolete")]
         public CreateAdvertCommandValidator()
         {
             RuleFor(a => a.Name)
@@ -23,7 +24,7 @@ namespace REA.AdvertSystem.Application.Adverts.Commands.AdvertValidation
             
             RuleFor(a => a.Adress)
                 .Cascade(CascadeMode.StopOnFirstFailure)
-                .NotEmpty().WithMessage("Adress is required.");
+                .NotEmpty().WithMessage("Address is required.");
 
             RuleFor(a => a.Square)
                 .Cascade(CascadeMode.StopOnFirstFailure)

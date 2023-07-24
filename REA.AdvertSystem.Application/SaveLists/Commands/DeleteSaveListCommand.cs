@@ -8,20 +8,20 @@ namespace REA.AdvertSystem.Application.SaveLists.Commands
 {
     public class DeleteSaveListCommandHandler : IRequestHandler<DeleteSaveListCommand, string>
     {
-        private IMongoCollection<SaveList> _saveList { get; }
+        private IMongoCollection<SaveList> SaveList { get; }
 
         public DeleteSaveListCommandHandler(IAgencyDbConnection connection)
         {
-            _saveList = connection.ConnectToMongo<SaveList>("SaveList");
+            SaveList = connection.ConnectToMongo<SaveList>("SaveList");
         }
 
         public async Task<string> Handle(DeleteSaveListCommand request, CancellationToken cancellationToken)
         {
-            var saveList = await _saveList.Find(x => x.ListID == request.Id).ToListAsync();
+            var saveList = await SaveList.Find(x => x.ListID == request.Id).ToListAsync();
 
             if (saveList.Count == 0) throw new NotFoundException("SaveList", request.Id);
 
-            await _saveList.DeleteOneAsync(x => x.ListID == request.Id);
+            await SaveList.DeleteOneAsync(x => x.ListID == request.Id);
 
             return request.Id;
         }

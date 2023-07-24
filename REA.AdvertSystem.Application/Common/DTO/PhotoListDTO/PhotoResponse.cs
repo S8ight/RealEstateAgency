@@ -4,7 +4,7 @@
     {
         public string PhotoID { get; set; }
 
-        public string PAdvertID { get; set; }
+        public string AdvertID { get; set; }
 
         public string PhotoLink { get; set; }
     }

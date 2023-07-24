@@ -7,11 +7,11 @@ namespace REA.AdvertSystem.Application.Users.Commands;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, string>
 {
-    private IMongoCollection<User> _user { get; }
+    private IMongoCollection<User> User { get; }
 
     public CreateUserCommandHandler(IAgencyDbConnection context)
     {
-        _user = context.ConnectToMongo<User>("Users");
+        User = context.ConnectToMongo<User>("Users");
     }
 
     public async Task<string> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -25,7 +25,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, strin
             Photo = request.Photo
         };
 
-        await _user.InsertOneAsync(entity, cancellationToken: cancellationToken);
+        await User.InsertOneAsync(entity, cancellationToken: cancellationToken);
 
 
         return entity.Id;

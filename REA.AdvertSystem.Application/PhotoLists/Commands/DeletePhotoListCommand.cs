@@ -8,20 +8,20 @@ namespace REA.AdvertSystem.Application.PhotoLists.Commands
 {
     public class DeletePhotoListCommandHandler : IRequestHandler<DeletePhotoListCommand, string>
     {
-        private IMongoCollection<PhotoList> _photoList { get; }
+        private IMongoCollection<PhotoList> PhotoList { get; }
 
         public DeletePhotoListCommandHandler(IAgencyDbConnection connection)
         {
-            _photoList = connection.ConnectToMongo<PhotoList>("PhotoList");
+            PhotoList = connection.ConnectToMongo<PhotoList>("PhotoList");
         }
 
         public async Task<string> Handle(DeletePhotoListCommand request, CancellationToken cancellationToken)
         {
-            var advert = await _photoList.Find(x => x.PhotoID == request.Id).ToListAsync();
+            var advert = await PhotoList.Find(x => x.PhotoID == request.Id).ToListAsync();
 
             if (advert == null) throw new NotFoundException("PhotoList", request.Id);
 
-            await _photoList.DeleteOneAsync(x => x.PhotoID == request.Id);
+            await PhotoList.DeleteOneAsync(x => x.PhotoID == request.Id);
 
             return request.Id;
         }

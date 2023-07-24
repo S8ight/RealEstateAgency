@@ -8,11 +8,11 @@ namespace REA.AdvertSystem.Application.Adverts.Commands
 
     public class CreateAdvertCommandHandler : IRequestHandler<CreateAdvertCommand, string>
     {
-        private IMongoCollection<Advert> _advert { get; }
+        private IMongoCollection<Advert> Advert { get; }
 
         public CreateAdvertCommandHandler(IAgencyDbConnection context)
         {
-            _advert = context.ConnectToMongo<Advert>("Advert");
+            Advert = context.ConnectToMongo<Advert>("Advert");
         }
 
         public async Task<string> Handle(CreateAdvertCommand request, CancellationToken cancellationToken)
@@ -30,7 +30,7 @@ namespace REA.AdvertSystem.Application.Adverts.Commands
                 AdvertType = request.AdvertType
             };
 
-            await _advert.InsertOneAsync(entity);
+            await Advert.InsertOneAsync(entity);
 
 
             return entity.AdvertID;

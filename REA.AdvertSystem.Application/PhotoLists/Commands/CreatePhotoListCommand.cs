@@ -7,11 +7,11 @@ namespace REA.AdvertSystem.Application.PhotoLists.Commands
 {
     public class CreatePhotoListCommandHandler : IRequestHandler<CreatePhotoListCommand, string>
     {
-        private IMongoCollection<PhotoList> _photoList { get; }
+        private IMongoCollection<PhotoList> PhotoList { get; }
         
         public CreatePhotoListCommandHandler(IAgencyDbConnection connection)
         {
-            _photoList = connection.ConnectToMongo<PhotoList>("PhotoList");
+            PhotoList = connection.ConnectToMongo<PhotoList>("PhotoList");
         }
 
         public async Task<string> Handle(CreatePhotoListCommand request, CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ namespace REA.AdvertSystem.Application.PhotoLists.Commands
                 PhotoLink = request.PhotoLink
             };
 
-            await _photoList.InsertOneAsync(entity);
+            await PhotoList.InsertOneAsync(entity);
 
 
             return entity.PhotoID;

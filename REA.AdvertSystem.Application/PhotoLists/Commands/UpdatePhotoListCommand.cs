@@ -7,11 +7,11 @@ namespace REA.AdvertSystem.Application.PhotoLists.Commands
 {
     public class UpdatePhotoListCommandHandler : IRequestHandler<UpdatePhotoListCommand, string>
     {
-        private IMongoCollection<PhotoList> _photoList { get; }
+        private IMongoCollection<PhotoList> PhotoList { get; }
 
         public UpdatePhotoListCommandHandler(IAgencyDbConnection connection)
         {
-            _photoList = connection.ConnectToMongo<PhotoList>("PhotoList");
+            PhotoList = connection.ConnectToMongo<PhotoList>("PhotoList");
         }
 
         public async Task<string> Handle(UpdatePhotoListCommand request, CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ namespace REA.AdvertSystem.Application.PhotoLists.Commands
                 PhotoLink = request.PhotoLink
             };
 
-            await _photoList.ReplaceOneAsync(Builders<PhotoList>.Filter.Eq("_id", request.PhotoID), newList);
+            await PhotoList.ReplaceOneAsync(Builders<PhotoList>.Filter.Eq("_id", request.PhotoID), newList);
 
             return newList.PhotoID;
         }

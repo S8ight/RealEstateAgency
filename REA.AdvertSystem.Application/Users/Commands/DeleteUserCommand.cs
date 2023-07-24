@@ -8,20 +8,20 @@ namespace REA.AdvertSystem.Application.Users.Commands;
 
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, string>
 {
-    private IMongoCollection<User> _user { get; }
+    private IMongoCollection<User> User { get; }
 
     public DeleteUserCommandHandler(IAgencyDbConnection context)
     {
-        _user= context.ConnectToMongo<User>("Users");
+        User= context.ConnectToMongo<User>("Users");
     }
 
     public async Task<string> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _user.Find(x => x.Id == request.Id).ToListAsync();
+        var user = await User.Find(x => x.Id == request.Id).ToListAsync();
 
         if (user == null) throw new NotFoundException("User", request.Id);
 
-        await _user.DeleteOneAsync(x => x.Id == request.Id);
+        await User.DeleteOneAsync(x => x.Id == request.Id);
 
         return request.Id;
     }

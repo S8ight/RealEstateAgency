@@ -16,20 +16,20 @@ namespace REA.AdvertSystem.Application.Adverts.Queries
 
     public class GetAdvertsPaginationListHandler : IRequestHandler<GetAdvertsPaginationList, PaginatedList<AdvertResponse>>
     {
-        private IMongoCollection<Advert> _advert { get; }
+        private IMongoCollection<Advert> Advert { get; }
 
-        private IMapper _mapper { get; }
+        private IMapper Mapper { get; }
 
         public GetAdvertsPaginationListHandler(IAgencyDbConnection context, IMapper mapper)
         {
-            _advert = context.ConnectToMongo<Advert>("Advert");
-            _mapper = mapper;
+            Advert = context.ConnectToMongo<Advert>("Advert");
+            Mapper = mapper;
         }
 
         public async Task<PaginatedList<AdvertResponse>> Handle(GetAdvertsPaginationList request, CancellationToken cancellationToken)
         {
-            var results = await PaginatedList<Advert>.GetPagerResultAsync(request.PageNumber, request.PageSize, _advert);
-            return _mapper.Map<PaginatedList<Advert>, PaginatedList<AdvertResponse>>(results);
+            var results = await PaginatedList<Advert>.GetPagerResultAsync(request.PageNumber, request.PageSize, Advert);
+            return Mapper.Map<PaginatedList<Advert>, PaginatedList<AdvertResponse>>(results);
         }
     }
 

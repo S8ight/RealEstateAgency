@@ -15,23 +15,23 @@ namespace REA.AdvertSystem.Application.SaveLists.Queries
 
     public class GetAdvertPhotoListHandler : IRequestHandler<GetSaveListbyUser, List<SaveListResponse>>
     {
-        private IMongoCollection<SaveList> _saveList { get; }
+        private IMongoCollection<SaveList> SaveList { get; }
 
-        private IMapper _mapper { get; }
+        private IMapper Mapper { get; }
 
         public GetAdvertPhotoListHandler(IAgencyDbConnection context, IMapper mapper)
         {
-            _saveList = context.ConnectToMongo<SaveList>("SaveList");
-            _mapper = mapper;
+            SaveList = context.ConnectToMongo<SaveList>("SaveList");
+            Mapper = mapper;
         }
 
         public async Task<List<SaveListResponse>> Handle(GetSaveListbyUser query, CancellationToken cancellationToken)
         {
-            var result = await _saveList.Find(x => x.UserID == query.Id).ToListAsync();
+            var result = await SaveList.Find(x => x.UserID == query.Id).ToListAsync();
 
             if (result.Count == 0) throw new NotFoundException("SaveList", query.Id);
 
-            return _mapper.Map<List<SaveList>, List<SaveListResponse>>(result);
+            return Mapper.Map<List<SaveList>, List<SaveListResponse>>(result);
         }
     }
 }

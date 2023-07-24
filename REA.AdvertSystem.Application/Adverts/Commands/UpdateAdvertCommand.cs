@@ -7,11 +7,11 @@ namespace REA.AdvertSystem.Application.Adverts.Commands
 {
     public class UpdateAdvertCommandHandler : IRequestHandler<UpdateAdvertCommand, string>
     {
-        private IMongoCollection<Advert> _advert { get; }
+        private IMongoCollection<Advert> Advert { get; }
 
         public UpdateAdvertCommandHandler(IAgencyDbConnection context)
         {
-            _advert = context.ConnectToMongo<Advert>("Advert");
+            Advert = context.ConnectToMongo<Advert>("Advert");
         }
 
         public async Task<string> Handle(UpdateAdvertCommand request, CancellationToken cancellationToken)
@@ -26,10 +26,11 @@ namespace REA.AdvertSystem.Application.Adverts.Commands
                 Price = request.Price,
                 Created = request.Created,
                 UserID = request.UserID,
+                AdvertType = request.AdvertType
                 
             };
 
-            await _advert.ReplaceOneAsync(Builders<Advert>.Filter.Eq("_id", request.AdvertID), newAdvert);
+            await Advert.ReplaceOneAsync(Builders<Advert>.Filter.Eq("_id", request.AdvertID), newAdvert);
 
             return newAdvert.AdvertID;
         }

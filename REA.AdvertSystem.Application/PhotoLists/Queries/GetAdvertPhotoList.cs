@@ -15,23 +15,23 @@ namespace REA.AdvertSystem.Application.PhotoLists.Queries
 
     public class GetAdvertPhotoListHandler : IRequestHandler<GetAdvertPhotoList, List<PhotoResponse>>
     {
-        private IMongoCollection<PhotoList> _photoList { get; }
+        private IMongoCollection<PhotoList> PhotoList { get; }
 
-        private IMapper _mapper { get; }
+        private IMapper Mapper { get; }
 
         public GetAdvertPhotoListHandler(IAgencyDbConnection context, IMapper mapper)
         {
-            _photoList = context.ConnectToMongo<PhotoList>("PhotoList");
-            _mapper = mapper;
+            PhotoList = context.ConnectToMongo<PhotoList>("PhotoList");
+            Mapper = mapper;
         }
 
         public async Task<List<PhotoResponse>> Handle(GetAdvertPhotoList query, CancellationToken cancellationToken)
         {
-            var result = await _photoList.Find(x => x.AdvertID == query.Id).ToListAsync();
+            var result = await PhotoList.Find(x => x.AdvertID == query.Id).ToListAsync();
 
             if (result.Count == 0) throw new NotFoundException("PhotoList", query.Id);
 
-            return _mapper.Map<List<PhotoList>, List<PhotoResponse>>(result); 
+            return Mapper.Map<List<PhotoList>, List<PhotoResponse>>(result); 
         }
     }
 }

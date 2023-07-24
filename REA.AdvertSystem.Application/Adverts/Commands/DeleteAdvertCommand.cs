@@ -8,20 +8,23 @@ namespace REA.AdvertSystem.Application.Adverts.Commands
 {
     public class DeleteAdvertCommandHandler : IRequestHandler<DeleteAdvertCommand, string>
     {
-        private IMongoCollection<Advert> _advert { get; }
+        private IMongoCollection<Advert> Advert { get; }
 
         public DeleteAdvertCommandHandler(IAgencyDbConnection context)
         {
-            _advert = context.ConnectToMongo<Advert>("Advert");
+            Advert = context.ConnectToMongo<Advert>("Advert");
         }
 
         public async Task<string> Handle(DeleteAdvertCommand request, CancellationToken cancellationToken)
         {
-            var advert = await _advert.Find(x => x.AdvertID == request.Id).ToListAsync();
+            var advert = await Advert.Find(x => x.AdvertID == request.Id).FirstOrDefaultAsync();
 
             if (advert == null) throw new NotFoundException("Advert", request.Id);
 
-            await _advert.DeleteOneAsync(x => x.AdvertID == request.Id);
+            var deleteResult = await Advert.DeleteOneAsync(x => x.AdvertID == request.Id);
+
+            if (deleteResult.DeletedCount == 0)
+                throw new Exception($"Failed to delete the advert with id: {request.Id}.");
 
             return request.Id;
         }
