@@ -13,7 +13,7 @@ public class ChatConfig : IEntityTypeConfiguration<Chat>
         builder.Property(c => c.UserId)
             .IsRequired();
 
-        builder.Property(c => c.RecieverId)
+        builder.Property(c => c.ReceiverId)
             .IsRequired();
             
         builder.Property(c => c.Created)

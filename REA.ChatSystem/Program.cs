@@ -1,7 +1,6 @@
 using System.Data;
 using System.Reflection;
 using MassTransit;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using REA.ChatSystem.BLL.Hubs;
@@ -54,39 +53,21 @@ builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Services.AddMassTransit(x =>
-{
-    x.AddConsumer<ChatUserConsumer>();
- 
-    x.UsingRabbitMq((context, cfg) =>
-    {
-        cfg.Host("rabbitmq://rabbitmq:5672");
- 
-        cfg.ReceiveEndpoint("chat-user-queue", ep =>
-        {
-            ep.PrefetchCount = 20;
-            ep.ConfigureConsumer<ChatUserConsumer>(context);
-        });
-    });
-});
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(o =>
-{
-    o.Authority = "https://localhost:7287"; 
-    o.Audience = "myresourceapi";
-    o.RequireHttpsMetadata = false;
-});
-
-builder.Services.AddAuthorization(options =>
-{
-    //options.AddPolicy("PublicSecure", policy => policy.RequireClaim("client_id", "secret_client_id"));
-    options.AddPolicy("UserSecure", policy => policy.RequireClaim("roleType", "CanReadData"));
-    options.AddPolicy("AdminSecure", policy => policy.RequireClaim("roleType", "CanUpdateData"));
-});
+// builder.Services.AddMassTransit(x =>
+// {
+//     x.AddConsumer<ChatUserConsumer>();
+//  
+//     x.UsingRabbitMq((context, cfg) =>
+//     {
+//         cfg.Host("rabbitmq://rabbitmq:5672");
+//  
+//         cfg.ReceiveEndpoint("chat-user-queue", ep =>
+//         {
+//             ep.PrefetchCount = 20;
+//             ep.ConfigureConsumer<ChatUserConsumer>(context);
+//         });
+//     });
+// });
 
 var app = builder.Build();
 
@@ -102,9 +83,16 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors(builder => builder
+    .WithOrigins("http://localhost:3000")
+    .WithOrigins("http://localhost:3001")
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials());
+
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapHub<ChatHub>("/chat");
+    endpoints.MapHub<ChatHub>("/chathub");
 });
 
 app.UseHttpsRedirection();
@@ -135,7 +123,7 @@ ElasticsearchSinkOptions ConfigureElasticsearchSinkOptions(IConfiguration config
     return new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
     {
         AutoRegisterTemplate = true,
-        IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower()}-{env.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+        IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name?.ToLower()}-{env.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
 
     };
 }

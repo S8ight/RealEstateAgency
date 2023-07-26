@@ -16,7 +16,7 @@ public class MessageConfig : IEntityTypeConfiguration<Message>
         builder.Property(m => m.SenderId)
             .IsRequired();
 
-        builder.Property(m => m.RecieverId)
+        builder.Property(m => m.ReceiverId)
             .IsRequired();
 
         builder.Property(m => m.MessageBody)

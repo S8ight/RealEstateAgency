@@ -17,7 +17,6 @@ public class MessageController : ControllerBase
         _logger = logger;
     }
     
-    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -32,8 +31,7 @@ public class MessageController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-    
-    [Authorize]
+
     [HttpGet("{chatId}")]
     public async Task<IActionResult> GetAllChatMessages(string chatId)
     {
@@ -48,8 +46,7 @@ public class MessageController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-
-    [Authorize]
+    
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(string id)
     {
@@ -64,15 +61,14 @@ public class MessageController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-
-    [Authorize]
+    
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] MessageRequest request)
     {
         try
         {
-            var data = await _messageService.AddAsync(request);
-            return Ok(data);
+            await _messageService.AddAsync(request);
+            return Ok();
         }
         catch (Exception e)
         {
@@ -81,9 +77,8 @@ public class MessageController : ControllerBase
         }
     }
     
-    [Authorize]
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] MessageRequest request)
+    public async Task<IActionResult> Update([FromBody] MessageUpdateRequest request)
     {
         try
         {
@@ -97,13 +92,12 @@ public class MessageController : ControllerBase
         }
     }
     
-    [Authorize]
     [HttpDelete]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete([FromBody] MessageDeleteRequest request)
     {
         try
         {
-            await _messageService.DeleteAsync(id);
+            await _messageService.DeleteAsync(request);
             return Ok();
         }
         catch (Exception e)
