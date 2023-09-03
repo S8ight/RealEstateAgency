@@ -1,13 +1,13 @@
 ﻿syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 option csharp_namespace = "DiscountGrpcService.Protos";
 
 service DiscountProtoService {
   rpc GetDiscount (GetDiscountRequest) returns (DiscountResponse);
-  rpc AddDiscount (AddDiscountRequest) returns (AddDiscountResponse);
-  rpc DeleteDiscount (DeleteDiscountRequest) returns (DeleteDiscountResponse);
+  rpc DeleteAdvertDiscounts (DeleteDiscountRequest) returns (google.protobuf.Empty);
 }
 
 message GetDiscountRequest {
@@ -15,29 +15,18 @@ message GetDiscountRequest {
   float Price = 2;
 }
 
-message AddDiscountRequest {
-  DiscountModel discount = 1;
+message DiscountResponse {
+  float CalculatedPrice = 1;
+  google.protobuf.Timestamp ExpiresAt = 2;
 }
 
 message DeleteDiscountRequest {
   string AdvertId = 1;
 }
 
-message AddDiscountResponse {
-  bool success  = 1;
-}
-
-message DeleteDiscountResponse {
-  bool success  = 1;
-}
-
-message DiscountResponse {
-  float CalculatedPrice = 1;
-}
-
 message DiscountModel
 {
   int32 Percentage = 1;
-  google.protobuf.Timestamp ExpieredAt = 2;
+  google.protobuf.Timestamp ExpiresAt = 2;
   string AdvertId = 3;
 }

@@ -1,23 +1,11 @@
 {
   "Version": 1,
-  "Hash": "b9mCHDWf7DAwHD6L3DuSMpUAs1CAVcofC64bt9F4/Lk=",
+  "Hash": "qbmddS7pFlgi2il65IyAS/dkz9M/dNd3oPMZeuG3R00=",
   "Source": "DiscountService",
   "BasePath": "_content/DiscountService",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [
-    {
-      "Identity": "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\DiscountGrpcService.csproj",
-      "Version": 2,
-      "Source": "DiscountGrpcService",
-      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
-      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
-    }
-  ],
+  "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
   "Assets": []
 }
