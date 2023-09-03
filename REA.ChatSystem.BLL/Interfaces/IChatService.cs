@@ -6,6 +6,7 @@ namespace REA.ChatSystem.BLL.Interfaces
     public interface IChatService
     {
         public Task<IEnumerable<ChatResponse>> GetAllAsync();
+        public Task<IEnumerable<ChatResponse>?> GetUserChats(string userId);
         public Task<ChatResponse> GetByIdAsync(string id);
         public Task<string> AddAsync(ChatRequest request);
         public Task DeleteAsync(string id);
