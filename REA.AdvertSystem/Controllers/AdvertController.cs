@@ -1,42 +1,57 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using REA.AdvertSystem.Application.Adverts.Commands;
 using REA.AdvertSystem.Application.Adverts.Queries;
 using REA.AdvertSystem.Application.Common.DTO.AdvertDTO;
 using REA.AdvertSystem.Application.Common.GrpcServices;
 using REA.AdvertSystem.Application.Common.Models;
+using REA.AdvertSystem.Application.PhotoLists.Commands;
+using REA.AdvertSystem.Application.PhotoLists.Queries;
+using REA.AdvertSystem.Application.Users.Queries;
 
 namespace REA.AdvertSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class AdvertController : ControllerBase
 {
     private IMediator _mediator = null!;
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
 
-    private DiscountServiceGrpc _discountServiceGrpc;
+    private readonly DiscountClientGrpc _discountClientGrpc;
     
-    public AdvertController(DiscountServiceGrpc discountServiceGrpc)
+    private readonly ILogger<AdvertController> _logger;
+    
+    public AdvertController(DiscountClientGrpc discountClientGrpc, ILogger<AdvertController> logger)
     {
-        _discountServiceGrpc = discountServiceGrpc;
+        _discountClientGrpc = discountClientGrpc;
+        _logger = logger;
     }
     
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpPost]
-    public async Task<ActionResult<string>> Create(CreateAdvertCommand command)
-    {
-        return await Mediator.Send(command);
-    }
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet]
-    public async Task<ActionResult<PaginatedList<AdvertResponse>>> GetAllAdverts(
-        [FromQuery] GetAdvertsPaginationList query)
+    [AllowAnonymous]
+    [HttpPost("CreateAdvert")]
+    public async Task<ActionResult<string>> CreateAdvert(CreateAdvertCommand command)
+    {
+        try
+        {
+            var result = await Mediator.Send(command);
+
+            _logger.LogInformation("Created advert: {Id}", result);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error occurred while creating advert");
+            return BadRequest(e.Message);
+        }
+    }
+    
+    [AllowAnonymous]
+    [HttpGet("GetAdvertsList")]
+    public async Task<ActionResult<PaginatedList<AdvertListResponse>>> GetAdvertsList([FromQuery] GetAdvertsPaginationList query)
     {
         try
         {
@@ -44,66 +59,82 @@ public class AdvertController : ControllerBase
 
             foreach (var advert in adverts.Items)
             {
-                var newPrice = await _discountServiceGrpc.GetDiscount(advert.AdvertID, advert.Price);
-                advert.Price = newPrice.CalculatedPrice;
+                var discount = await _discountClientGrpc.GetDiscount(advert.Id, advert.Price);
+                if (discount.ExpiresAt != null)
+                {
+                    advert.PriceWithDiscount = discount.CalculatedPrice;
+                    advert.DiscountExpirationTime = discount.ExpiresAt.ToDateTime();
+                }
+
+                advert.PhotoUrl = await Mediator.Send(new GetAdvertPreviewPhotoList { Id = advert.Id });
             }
             return Ok(adverts);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e,"Error occurred while retrieving the list of adverts");
+            return BadRequest(e.Message);
         }
     }
-
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet("{id}")]
-    public async Task<ActionResult<AdvertResponse>> GetById(string id)
+    
+    [AllowAnonymous]
+    [HttpGet("GetAdvert/{id}")]
+    public async Task<ActionResult<AdvertResponse>> GetAdvertById(string id)
     {
         try
         {
-            GetAdvertsById query = new GetAdvertsById() { Id = id };
-            var advert = await Mediator.Send(query);
-            var newPrice = await _discountServiceGrpc.GetDiscount(id, advert.Price);
-            advert.Price = newPrice.CalculatedPrice;
+            var advert = await Mediator.Send(new GetAdvertsById { Id = id });
+            advert.PhotoList = await Mediator.Send(new GetAdvertPhotoList{Id = id});
+            
+            var discount = await _discountClientGrpc.GetDiscount(id, advert.Price);
+            if (discount.ExpiresAt != null)
+            {
+                advert.PriceWithDiscount = discount.CalculatedPrice;
+                advert.DiscountExpirationTime = discount.ExpiresAt.ToDateTime();
+            }
+
+            advert.Seller = await Mediator.Send(new GetUserById { Id = advert.UserId });
+
             return Ok(advert);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while receiving the advert");
+            return BadRequest(e.Message);
         }
     }
-
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpDelete]
-    public async Task<ActionResult<string>> Delete([FromQuery] DeleteAdvertCommand command)
+    
+    [AllowAnonymous]
+    [HttpDelete("DeleteAdvert")]
+    public async Task<ActionResult<string>> DeleteAdvert([FromQuery] DeleteAdvertCommand command)
     {
         try
         {
-            return Ok(await Mediator.Send(command));
+            await Mediator.Send(command);
+            await _discountClientGrpc.DeleteAdvertDiscounts(command.Id);
+            await Mediator.Send(new DeleteAdvertPhotoListsCommand { AdvertId = command.Id });
+            
+            _logger.LogInformation("Advert with id: {Id} deleted", command.Id);
+            return Ok();
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while deleting the advert: {Id}", command.Id);
+            return BadRequest(e.Message);
         }
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpPut]
-    public async Task<ActionResult<string>> Update(UpdateAdvertCommand command)
+    public async Task<ActionResult<string>> UpdateAdvert(UpdateAdvertCommand command)
     {
         try
         {
             return Ok(await Mediator.Send(command));
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while updating the advert: {Id}", command.Id);
+            return BadRequest(e.Message);
         }
     }
 }
