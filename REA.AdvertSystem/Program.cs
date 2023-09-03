@@ -2,16 +2,19 @@ using FluentValidation;
 using MediatR;
 using MongoDB.Driver;
 using System.Reflection;
+using System.Text;
 using DiscountGrpcService.Protos;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using REA.AdvertSystem.Application.Adverts.Commands;
 using REA.AdvertSystem.Application.Adverts.Queries;
 using REA.AdvertSystem.Application.Common.Behaviours;
+using REA.AdvertSystem.Application.Common.Consumers;
 using REA.AdvertSystem.Application.Common.GrpcServices;
 using REA.AdvertSystem.Application.Common.Interfaces;
-using REA.AdvertSystem.Application.Common.Mapping;
-using REA.AdvertSystem.Application.Common.Models;
 using REA.AdvertSystem.Infrastructure.DataAccess;
+using Serilog;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,11 +23,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<MongoDatabaseSettings>(
     builder.Configuration.GetSection("AdvertDatabase"));
 
+builder.Host.UseSerilog((context, configuration) => 
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 builder.Services.AddScoped<IAgencyDbConnection, AgencyDbConnection>();
 
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<AdvertUserConsumer>();
+    x.AddConsumer<UserRegistrationConsumer>();
+    x.AddConsumer<UserUpdateConsumer>();
+    x.AddConsumer<UserDeleteConsumer>();
   
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -33,8 +41,11 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint("advert-user-queue", ep =>
         {
             ep.PrefetchCount = 20;
-            ep.ConfigureConsumer<AdvertUserConsumer>(context);
+            ep.ConfigureConsumer<UserRegistrationConsumer>(context);
+            ep.ConfigureConsumer<UserUpdateConsumer>(context);
+            ep.ConfigureConsumer<UserDeleteConsumer>(context);
         });
+
     });
 });
 
@@ -42,8 +53,17 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
 (g =>
 {
     g.Address = new Uri( builder.Configuration["ConnectionStrings:Grpc"]);
-});
-builder.Services.AddScoped<DiscountServiceGrpc>();
+})
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        var handler = new HttpClientHandler();
+        handler.ServerCertificateCustomValidationCallback = 
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+
+        return handler;
+    });
+
+builder.Services.AddScoped<DiscountClientGrpc>();
 
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -63,6 +83,22 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = builder.Configuration["ConnectionStrings:Redis"];
     options.InstanceName = "RedisAdvertsProject";
 });
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = false,
+            ValidateIssuerSigningKey = false,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:AccessTokenKey"] ?? string.Empty))
+        };
+    });
+
 
 builder.Services.AddControllers();
 
@@ -88,6 +124,8 @@ var app = builder.Build();
 
 app.UseCors(myAllowedOrigins);
 
+app.UseSerilogRequestLogging();
+
 app.UseHttpsRedirection();
 
 app.UseCors();
@@ -98,6 +136,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

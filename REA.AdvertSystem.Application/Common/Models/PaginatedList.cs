@@ -11,7 +11,7 @@ namespace REA.AdvertSystem.Application.Common.Models
 
         public int Size { get; set; }
 
-        public IEnumerable<Advert> Items { get; set; }
+        public IEnumerable<T> Items { get; set; }
 
         public static async Task<PaginatedList<Advert>> GetPagerResultAsync(int page, int pageSize, IMongoCollection<Advert> collection)
         {
@@ -32,7 +32,7 @@ namespace REA.AdvertSystem.Application.Common.Models
             var filter = Builders<Advert>.Filter.Empty;
             var aggregation = await collection.Aggregate()
                 .Match(filter)
-                .Facet<Advert>(countFacet, dataFacet)
+                .Facet(countFacet, dataFacet)
                 .ToListAsync();
 
             var count = aggregation.First()
@@ -44,6 +44,7 @@ namespace REA.AdvertSystem.Application.Common.Models
             var data = aggregation.First()
                 .Facets.First(x => x.Name == "dataFacet")
                 .Output<Advert>();
+            
 
             return new PaginatedList<Advert>
             {

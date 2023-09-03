@@ -17,11 +17,21 @@ namespace REA.AdvertSystem.Application.PhotoLists.Commands
 
         public async Task<string> Handle(DeletePhotoListCommand request, CancellationToken cancellationToken)
         {
-            var advert = await PhotoList.Find(x => x.PhotoID == request.Id).ToListAsync();
+            var advert = await PhotoList.Find(x => x.Id == request.Id)
+                .ToListAsync(cancellationToken: cancellationToken);
 
-            if (advert == null) throw new NotFoundException("PhotoList", request.Id);
+            if (advert == null)
+            {
+                throw new NotFoundException("PhotoList", request.Id);
+            }
 
-            await PhotoList.DeleteOneAsync(x => x.PhotoID == request.Id);
+            var deleteResult = await PhotoList.DeleteOneAsync(x => x.Id == request.Id, 
+                cancellationToken: cancellationToken);
+            
+            if (deleteResult.DeletedCount == 0)
+            {
+                throw new ArgumentException($"Failed to delete the PhotoList with id: {request.Id}.");
+            }
 
             return request.Id;
         }

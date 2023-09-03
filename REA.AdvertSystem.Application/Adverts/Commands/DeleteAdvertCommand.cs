@@ -17,14 +17,19 @@ namespace REA.AdvertSystem.Application.Adverts.Commands
 
         public async Task<string> Handle(DeleteAdvertCommand request, CancellationToken cancellationToken)
         {
-            var advert = await Advert.Find(x => x.AdvertID == request.Id).FirstOrDefaultAsync();
+            var advert = await Advert.Find(x => x.Id == request.Id).FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
-            if (advert == null) throw new NotFoundException("Advert", request.Id);
+            if (advert == null)
+            {
+                throw new NotFoundException("Advert", request.Id);
+            }
 
-            var deleteResult = await Advert.DeleteOneAsync(x => x.AdvertID == request.Id);
+            var deleteResult = await Advert.DeleteOneAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
 
             if (deleteResult.DeletedCount == 0)
-                throw new Exception($"Failed to delete the advert with id: {request.Id}.");
+            {
+                throw new ArgumentException($"Failed to delete the advert with id: {request.Id}.");
+            }
 
             return request.Id;
         }

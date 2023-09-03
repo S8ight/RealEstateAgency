@@ -5,13 +5,17 @@ namespace REA.AdvertSystem.Domain.Entities
     public class Advert
     {
         [BsonId]
-        public string AdvertID { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
 
         public string Adress { get; set; }
+        
+        public string Country { get; set; }
+        
+        public string Settlement { get; set; }
 
         public float Square { get; set; }
 
@@ -19,8 +23,12 @@ namespace REA.AdvertSystem.Domain.Entities
 
         public DateTime Created { get; set; }
 
-        public string UserID { get; set; }
+        public string UserId { get; set; }
 
-        public string AdvertType { get; set; }
+        public string EstateType { get; set; }
+
+        public bool IsForSale { get; set; }
+
+        public bool IsForRent { get; set; }
     }
 }

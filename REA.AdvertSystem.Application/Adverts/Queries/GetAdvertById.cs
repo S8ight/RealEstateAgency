@@ -27,11 +27,17 @@ namespace REA.AdvertSystem.Application.Adverts.Queries
 
         public async Task<AdvertResponse> Handle(GetAdvertsById query, CancellationToken cancellationToken)   
         {
-            var result = await Advert.Find(x => x.AdvertID == query.Id).ToListAsync();
+            var result = await Advert.Find(x => x.Id == query.Id)
+                .ToListAsync(cancellationToken: cancellationToken);
 
-            if(result.Count == 0) throw new NotFoundException("Advert", query.Id);
+            if (result.Count == 0)
+            {
+                throw new NotFoundException("Advert", query.Id);
+            }
 
-            return Mapper.Map<Advert,AdvertResponse>(result.FirstOrDefault()!);
+            var advertResponse = Mapper.Map<Advert,AdvertResponse>(result.FirstOrDefault()!);
+
+            return advertResponse;
 
         }
     }

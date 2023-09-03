@@ -8,12 +8,12 @@ using REA.AdvertSystem.Domain.Entities;
 
 namespace REA.AdvertSystem.Application.PhotoLists.Queries
 {
-    public record GetPhotoListById : IRequest<PhotoResponse>
+    public record GetAdvertPreviewPhotoList : IRequest<string>
     {
         public string Id { get; set; }
     }
 
-    public class GetPhotoListByIdHandler : IRequestHandler<GetPhotoListById, PhotoResponse>
+    public class GetPhotoListByIdHandler : IRequestHandler<GetAdvertPreviewPhotoList, string>
     {
         private IMongoCollection<PhotoList> PhotoList { get; }
 
@@ -25,14 +25,17 @@ namespace REA.AdvertSystem.Application.PhotoLists.Queries
             Mapper = mapper;
         }
 
-        public async Task<PhotoResponse> Handle(GetPhotoListById query, CancellationToken cancellationToken)
+        public async Task<string> Handle(GetAdvertPreviewPhotoList query, CancellationToken cancellationToken)
         {
-            var result = await PhotoList.Find(x => x.PhotoID == query.Id).ToListAsync();
+            var photoList = await PhotoList.Find(x => x.AdvertId == query.Id)
+                .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
-            if (result.Count == 0) throw new NotFoundException("PhotoList", query.Id);
+            if (photoList == null)
+            {
+                throw new ArgumentException("Advert has no photos");
+            }
 
-            return Mapper.Map<PhotoList, PhotoResponse>(result.FirstOrDefault());
-
+            return photoList.PhotoLink;
         }
     }
 }

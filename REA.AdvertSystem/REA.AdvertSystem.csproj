@@ -12,14 +12,17 @@
         <PackageReference Include="MassTransit" Version="8.0.10-develop.714" />
         <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.10-develop.714" />
         <PackageReference Include="MediatR" Version="11.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
         <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.1" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
         <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
         <PackageReference Include="StackExchange.Redis" Version="2.6.86" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DiscountService\DiscountService.csproj" />
       <ProjectReference Include="..\REA.AdvertSystem.Application\REA.AdvertSystem.Application.csproj" />
       <ProjectReference Include="..\REA.AdvertSystem.Infrastructure\REA.AdvertSystem.Infrastructure.csproj" />
     </ItemGroup>

@@ -27,11 +27,17 @@ namespace REA.AdvertSystem.Application.PhotoLists.Queries
 
         public async Task<List<PhotoResponse>> Handle(GetAdvertPhotoList query, CancellationToken cancellationToken)
         {
-            var result = await PhotoList.Find(x => x.AdvertID == query.Id).ToListAsync();
+            var photoLists = await PhotoList.Find(x => x.AdvertId == query.Id)
+                .ToListAsync(cancellationToken: cancellationToken);
 
-            if (result.Count == 0) throw new NotFoundException("PhotoList", query.Id);
+            if (photoLists.Count == 0)
+            {
+                throw new NotFoundException("PhotoList", query.Id);
+            }
 
-            return Mapper.Map<List<PhotoList>, List<PhotoResponse>>(result); 
+            var mappedLists = Mapper.Map<List<PhotoList>, List<PhotoResponse>>(photoLists);
+
+            return mappedLists;
         }
     }
 }

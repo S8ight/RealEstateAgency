@@ -1,4 +1,6 @@
-﻿namespace REA.AdvertSystem.Application.Common.DTO.UserDTO;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace REA.AdvertSystem.Application.Common.DTO.UserDTO;
 
 public class UserResponse
 {
@@ -10,5 +12,5 @@ public class UserResponse
         
     public string? Patronymic { get; set; }
         
-    public byte[]? Photo { get; set; }
+    public FileContentResult? Photo { get; set; }
 }

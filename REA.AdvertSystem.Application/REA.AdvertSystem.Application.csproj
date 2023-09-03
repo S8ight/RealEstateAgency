@@ -18,8 +18,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AuthorizationService.BLL\AuthorizationService.BLL.csproj" />
-      <ProjectReference Include="..\DiscountGrpcService\DiscountGrpcService.csproj" />
+      <ProjectReference Include="..\ApiGateWay\ApiGateWay.csproj" />
+      <ProjectReference Include="..\DiscountService\DiscountService.csproj" />
       <ProjectReference Include="..\REA.AdvertSystem.Domain\REA.AdvertSystem.Domain.csproj" />
     </ItemGroup>
 

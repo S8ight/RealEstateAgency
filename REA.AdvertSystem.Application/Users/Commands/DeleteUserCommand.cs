@@ -17,12 +17,21 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, strin
 
     public async Task<string> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await User.Find(x => x.Id == request.Id).ToListAsync();
+        var user = await User.Find(x => x.Id == request.Id)
+            .ToListAsync(cancellationToken: cancellationToken);
 
-        if (user == null) throw new NotFoundException("User", request.Id);
+        if (user == null)
+        {
+            throw new NotFoundException("User", request.Id);
+        }
 
-        await User.DeleteOneAsync(x => x.Id == request.Id);
-
+        var deleteResult = await User.DeleteOneAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+        
+        if (deleteResult.DeletedCount == 0)
+        {
+            throw new ArgumentException($"Failed to delete the user with id: {request.Id}.");
+        }
+        
         return request.Id;
     }
 }
