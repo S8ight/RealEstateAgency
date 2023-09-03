@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using REA.AdvertSystem.Application.Common.DTO.SaveListDTO;
@@ -10,93 +11,74 @@ namespace REA.AdvertSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class SaveListController : ControllerBase
 {
     private IMediator _mediator = null!;
-    private IDistributedCache cache;
+    private readonly IDistributedCache _cache;
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
+    
+    private readonly ILogger<SaveListController> _logger;
 
-    public SaveListController(IDistributedCache _cache)
+    public SaveListController(IDistributedCache cache, ILogger<SaveListController> logger)
     {
-        cache = _cache;
+        _cache = cache;
+        _logger = logger;
     }
-
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpPost]
-    public async Task<ActionResult<string>> Create(CreateSaveListCommand command)
+    
+    [HttpPost("CreateSaveList")]
+    public async Task<ActionResult<string>> CreateSaveList(CreateSaveListRecordCommand recordCommand)
     {
         try
         {
-            return Ok(await Mediator.Send(command));
+            return Ok(await Mediator.Send(recordCommand));
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while creating SaveList");
+            return BadRequest(e.Message);
         }
     }
 
-
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet]
-    public async Task<ActionResult<List<SaveListResponse>>> GetAllAdverts([FromQuery] GetSaveListbyUser query)
+    
+    [HttpGet("GetSaveListAdverts")]
+    public async Task<ActionResult<List<SaveListResponse>>> GetSaveListAdverts([FromQuery] GetSaveListbyUser query)
     {
-        List<SaveListResponse>? response;
         string recordKey = $"SaveList_User_{query.Id}";
         try
         {
-            response = await cache.GetRecordAsync<List<SaveListResponse>>(recordKey);
+            List<SaveListResponse>? response = await _cache.GetRecordAsync<List<SaveListResponse>>(recordKey);
 
             if (response is null)
             {
                 response = await Mediator.Send(query);
-                await cache.SetRecordAsync(recordKey, response);
+                await _cache.SetRecordAsync(recordKey, response);
             }
 
             return Ok(response);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e,"Error occurred while receiving adverts from SaveList");
+            return BadRequest(e.Message);
         }
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpDelete]
-    public async Task<ActionResult<string>> Delete(DeleteSaveListCommand command)
+    [HttpDelete("DeleteSaveListRecord")]
+    public async Task<ActionResult<string>> DeleteSaveListRecord(DeleteSaveListRecordCommand recordCommand)
     {
         try
         {
-            var id = await Mediator.Send(command);
-
-            await cache.RemoveAsync($"SaveList_User_{id}");
-
-            return Ok(id);
+            var id = await Mediator.Send(recordCommand);
+            
+            await _cache.RemoveAsync($"SaveList_User_{id}");
+            
+            return Ok();
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpPut]
-    public async Task<ActionResult<string>> Update(UpdateSaveListCommand command)
-    {
-        try
-        {
-            return Ok(await Mediator.Send(command));
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while deleting SaveList");
+            return BadRequest(e.Message);
         }
     }
 }
