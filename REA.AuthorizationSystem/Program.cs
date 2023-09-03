@@ -1,94 +1,140 @@
-using System.Reflection;
-using System.Text.Json.Serialization;
+using System.Text;
+using Serilog;
+using ApiGateWay.Models;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using REA.AuthorizationSystem.BLL.Authorization;
-using REA.AuthorizationSystem.BLL.Authorization.Helpers;
-using REA.AuthorizationSystem.BLL.DTO.Request;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using REA.AuthorizationSystem.BLL.Interfaces;
 using REA.AuthorizationSystem.BLL.Services;
+using REA.AuthorizationSystem.BLL.Validation;
 using REA.AuthorizationSystem.DAL.Context;
-using REA.AuthorizationSystem.DAL.Data.Repositories;
 using REA.AuthorizationSystem.DAL.Entities;
-using REA.AuthorizationSystem.DAL.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddDbContext<AgencyContext>(options =>
+builder.Services.AddDbContext<AgencyIdentityContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddControllers()
-    .AddJsonOptions(x => x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
+builder.Host.UseSerilog((context, configuration) => 
+    configuration.ReadFrom.Configuration(context.Configuration));
 
-// configure strongly typed settings object
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IJwtConfiguration, JwtConfiguration>();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
-builder.Services.AddControllers().AddFluentValidation(options =>
-{
-    options.ImplicitlyValidateChildProperties = true;
-    options.ImplicitlyValidateRootCollectionElements = true;
-    options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-});
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<UserValidation>();
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
     {
         options.User.RequireUniqueEmail = true;
-        options.SignIn.RequireConfirmedEmail = true;
+        options.Password.RequiredLength = 8;
+        options.SignIn.RequireConfirmedEmail = false;
     })
-    .AddEntityFrameworkStores<AgencyContext>()
+    .AddEntityFrameworkStores<AgencyIdentityContext>()
     .AddDefaultTokenProviders();
 
 
 builder.Services.AddMassTransit(x =>
 {
-    
-    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+    x.AddBus(_ => Bus.Factory.CreateUsingRabbitMq(config =>
     {
-        config.Host(new Uri("rabbitmq://rabbitmq:5672"), h =>
+        config.Host(new Uri(builder.Configuration["RabbitMQ:ConnectionString"]), h =>
         {
-            h.Username("guest");
-            h.Password("guest");
+            h.Username(builder.Configuration["RabbitMQ:Username"]);
+            h.Password(builder.Configuration["RabbitMQ:Password"]);
         });
-        config.Message<QueueRequest>(x=>{ });
+        config.Message<UserRegistrationQueueModel>(_=>{ });
     }));
 });
 
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+             ValidateIssuer = false,
+             ValidateAudience = false,
+             ValidateLifetime = false,
+             ValidateIssuerSigningKey = false,
+             ValidIssuer = builder.Configuration["Jwt:Issuer"],
+             ValidAudience = builder.Configuration["Jwt:Audience"],
+             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:AccessTokenKey"] ?? string.Empty))
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine($"Authentication failed: {context.Exception.Message}");
+                return Task.CompletedTask;
+            }
+        };
+    });
+
 builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { });
+    
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter your Bearer token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseCors(x => x
-    .SetIsOriginAllowed(origin => true)
+    .SetIsOriginAllowed(_ => true)
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials());
-
-app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 

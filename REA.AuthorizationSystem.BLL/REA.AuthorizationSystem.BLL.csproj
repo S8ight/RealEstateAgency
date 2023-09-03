@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ApiGateWay\ApiGateWay.csproj" />
       <ProjectReference Include="..\REA.AuthorizationSystem.DAL\REA.AuthorizationSystem.DAL.csproj" />
     </ItemGroup>
 
