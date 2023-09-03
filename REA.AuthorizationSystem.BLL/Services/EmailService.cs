@@ -1,36 +1,44 @@
-﻿using MailKit.Net.Smtp;
-using MailKit.Security;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using MimeKit.Text;
-using REA.AuthorizationSystem.BLL.Authorization.Helpers;
+﻿using System.Net;
+using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using REA.AuthorizationSystem.BLL.Interfaces;
 
 namespace REA.AuthorizationSystem.BLL.Services;
 
 public class EmailService : IEmailService
 {
-    private readonly AppSettings _appSettings;
-
-    public EmailService(IOptions<AppSettings> appSettings)
+    private readonly IConfiguration _configuration;
+    private readonly ILogger<EmailService> _logger;
+    public EmailService(IConfiguration configuration, ILogger<EmailService> logger)
     {
-        _appSettings = appSettings.Value;
+        _configuration = configuration;
+        _logger = logger;
     }
-
-    public void Send(string to, string subject, string html, string from = null)
+    
+    public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        // create message
-        var email = new MimeMessage();
-        email.From.Add(MailboxAddress.Parse(from ?? _appSettings.EmailFrom));
-        email.To.Add(MailboxAddress.Parse(to));
-        email.Subject = subject;
-        email.Body = new TextPart(TextFormat.Html) { Text = html };
+        var mailMessage = new MailMessage("bhoof.inc@gmail.com", toEmail);
+        mailMessage.Subject = subject;
+        mailMessage.Body = message;
 
-        // send email
-        using var smtp = new SmtpClient();
-        smtp.Connect(_appSettings.SmtpHost, _appSettings.SmtpPort, SecureSocketOptions.StartTls);
-        smtp.Authenticate(_appSettings.SmtpUser, _appSettings.SmtpPass);
-        smtp.Send(email);
-        smtp.Disconnect(true);
+        try
+        {
+            var smptClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("bhoof.inc@gmail.com", 
+                    _configuration["Email:Password"]),
+                EnableSsl = true
+            };
+
+            await smptClient.SendMailAsync(mailMessage);
+            _logger.LogInformation("Email sent to: {ToEmail}", toEmail);
+        }
+        catch (SmtpException e)
+        {
+            _logger.LogError(e, "Error sending email to {ToEmail}", toEmail);
+            throw;
+        }
     }
 }
