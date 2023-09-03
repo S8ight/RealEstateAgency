@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using REA.AdvertSystem.Application.Common.DTO.PhotoListDTO;
 using REA.AdvertSystem.Application.PhotoLists.Commands;
@@ -8,89 +9,80 @@ namespace REA.AdvertSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class PhotoListController : ControllerBase
 {
     private IMediator _mediator = null!;
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
+    
+    private readonly ILogger<PhotoListController> _logger;
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpPost]
-    public async Task<ActionResult<string>> Create(CreatePhotoListCommand command)
+    public PhotoListController(ILogger<PhotoListController> logger)
+    {
+        _logger = logger;
+    }
+    
+    [AllowAnonymous]
+    [HttpPost("CreatePhotoList")]
+    public async Task<ActionResult<string>> CreatePhotoList(CreatePhotoListCommand command)
     {
         try
         {
             return Ok(await Mediator.Send(command));
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while creating photo list");
+            return BadRequest(e.Message);
         }
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet]
+    [AllowAnonymous]
+    [HttpGet("GetAllAdvertPhotos")]
     public async Task<ActionResult<List<PhotoResponse>>> GetAllAdvertPhotos([FromQuery] GetAdvertPhotoList query)
     {
         try
         {
             return Ok(await Mediator.Send(query));
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while receiving Advert({Id}) photos", query.Id);
+            return BadRequest(e.Message);
         }
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet("{id}")]
-    public async Task<ActionResult<PhotoResponse>> GetPhotoById(string id)
+    [HttpDelete("DeletePhotoList")]
+    public async Task<ActionResult<string>> DeletePhotoList(DeletePhotoListCommand command)
     {
         try
         {
-            GetPhotoListById query = new GetPhotoListById() { Id = id };
-            return await Mediator.Send(query);
+            var result = await Mediator.Send(command);
+            
+            _logger.LogInformation("Deleted photo: {Id}", command.Id);
+            return Ok(result);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while deleting photo");
+            return BadRequest(e.Message);
         }
     }
-
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpDelete]
-    public async Task<ActionResult<string>> Delete(DeletePhotoListCommand command)
+    
+    [HttpPut("UpdatePhotoList")]
+    public async Task<ActionResult<string>> UpdatePhotoList(UpdatePhotoListCommand command)
     {
         try
         {
-            return Ok(await Mediator.Send(command));
+            var result = await Mediator.Send(command);
+            
+            _logger.LogInformation("Updated PhotoList: {Id}", command.Id);
+            return Ok(result);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpPut]
-    public async Task<ActionResult<string>> Update(UpdatePhotoListCommand command)
-    {
-        try
-        {
-            return Ok(await Mediator.Send(command));
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while updating photo");
+            return BadRequest(e.Message);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using REA.AdvertSystem.Application.Common.DTO.AdvertDTO;
 using REA.AdvertSystem.Application.Common.DTO.UserDTO;
@@ -9,66 +10,67 @@ namespace REA.AdvertSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class UserController : ControllerBase
 {
     private IMediator _mediator = null!;
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
+    
+    private readonly ILogger<UserController> _logger;
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpPost]
-    public async Task<ActionResult<string>> Create(CreateUserCommand command)
+    public UserController(ILogger<UserController> logger)
     {
-        return await Mediator.Send(command);
+        _logger = logger;
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpGet("{id}")]
-    public async Task<ActionResult<UserResponse>> GetById(string id)
+    [AllowAnonymous]
+    [HttpGet("GetUser")]
+    public async Task<ActionResult<UserResponse>> GetUserById([FromQuery] GetUserById request)
     {
         try
         {
-            var query = new GetUserById() { Id = id };
-            return Ok(await Mediator.Send(query));
+            var user = await Mediator.Send(request);
+            
+            return Ok(user);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while receiving user: {Id}", request.Id);
+            return BadRequest(e.Message);
         }
     }
 
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpDelete]
-    public async Task<ActionResult<string>> Delete([FromQuery] DeleteUserCommand command)
+    public async Task<ActionResult<string>> DeleteUser([FromQuery] DeleteUserCommand command)
     {
         try
         {
+            await Mediator.Send(command);
+            
+            _logger.LogInformation("User Deleted: {Id}", command.Id);
             return Ok(await Mediator.Send(command));
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while deleting user: {Id}", command.Id);
+            return BadRequest(e.Message);
         }
     }
-
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    
     [HttpPut]
-    public async Task<ActionResult<string>> Update(UpdateUserCommand command)
+    public async Task<ActionResult<string>> UpdateUser(UpdateUserCommand command)
     {
         try
         {
-            return Ok(await Mediator.Send(command));
+            var result = await Mediator.Send(command);
+            
+            _logger.LogInformation("User updated: {Id}", command.Id);
+            return Ok(result);
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            _logger.LogError(e, "Error occurred while updating user: {Id}", command.Id);
+            return BadRequest(e.Message);
         }
     }
 }
