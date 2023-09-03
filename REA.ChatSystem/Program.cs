@@ -1,8 +1,12 @@
 using System.Data;
 using System.Reflection;
+using System.Text;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using REA.ChatSystem.BLL.Consumers;
 using REA.ChatSystem.BLL.Hubs;
 using REA.ChatSystem.BLL.Interfaces;
 using REA.ChatSystem.BLL.Services;
@@ -29,6 +33,8 @@ builder.Services.AddDbContext<AgencyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Host.UseSerilog((context, configuration) => 
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddScoped<IDbTransaction>(s =>
 {
@@ -53,21 +59,41 @@ builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-// builder.Services.AddMassTransit(x =>
-// {
-//     x.AddConsumer<ChatUserConsumer>();
-//  
-//     x.UsingRabbitMq((context, cfg) =>
-//     {
-//         cfg.Host("rabbitmq://rabbitmq:5672");
-//  
-//         cfg.ReceiveEndpoint("chat-user-queue", ep =>
-//         {
-//             ep.PrefetchCount = 20;
-//             ep.ConfigureConsumer<ChatUserConsumer>(context);
-//         });
-//     });
-// });
+builder.Services.AddMassTransit(x =>
+{
+    
+    x.AddConsumer<UserRegistrationConsumer>();
+    x.AddConsumer<UserUpdateConsumer>();
+    x.AddConsumer<UserDeleteConsumer>();
+  
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration["ConnectionStrings:RabbitMQConnection"]);
+  
+        cfg.ReceiveEndpoint("chat-user-queue", ep =>
+        {
+            ep.PrefetchCount = 20;
+            ep.ConfigureConsumer<UserRegistrationConsumer>(context);
+            ep.ConfigureConsumer<UserUpdateConsumer>(context);
+            ep.ConfigureConsumer<UserDeleteConsumer>(context);
+        });
+    });
+});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = false,
+            ValidateIssuerSigningKey = false,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:AccessTokenKey"] ?? string.Empty))
+        };
+    });
 
 var app = builder.Build();
 
@@ -79,11 +105,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
+app.UseSerilogRequestLogging();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors(builder => builder
+app.UseCors(corsPolicyBuilder => corsPolicyBuilder
     .WithOrigins("http://localhost:3000")
     .WithOrigins("http://localhost:3001")
     .AllowAnyMethod()

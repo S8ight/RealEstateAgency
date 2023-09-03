@@ -6,13 +6,11 @@ namespace REA.ChatSystem.DAL.Context;
 
 public class DatabaseConnectionFactory : IDatabaseConnectionFactory
 {
-    private IConfiguration _configuration;
-
+    
     private IDbConnection _connection;
 
-    public DatabaseConnectionFactory(IConfiguration configuration, IDbConnection connection)
+    public DatabaseConnectionFactory( IDbConnection connection)
     {
-        _configuration = configuration;
         _connection = connection;
     }
     public IDbConnection GetConnection()

@@ -7,6 +7,7 @@ namespace REA.ChatSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class MessageController : ControllerBase
 {
     private readonly IMessageService _messageService;
@@ -16,54 +17,40 @@ public class MessageController : ControllerBase
         _messageService = messageService;
         _logger = logger;
     }
-    
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
-    {
-        try
-        {
-            var data = await _messageService.GetAllAsync();
-            return Ok(data);
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e.Message);
-            return BadRequest(e.Message);
-        }
-    }
 
-    [HttpGet("{chatId}")]
-    public async Task<IActionResult> GetAllChatMessages(string chatId)
+    [HttpGet("GetChatMessages/{chatId}")]
+    public async Task<IActionResult> GetChatMessages(string chatId)
     {
         try
         {
-            var data = await _messageService.GetAllMessagesForChatAsync(chatId);
-            return Ok(data);
+            var messages = await _messageService.GetAllMessagesForChatAsync(chatId);
+            return Ok(messages);
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e, "Error occurred while processing the request");
             return BadRequest(e.Message);
         }
     }
     
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(string id)
+    [AllowAnonymous]
+    [HttpGet("GetMessage/{messageId}")]
+    public async Task<IActionResult> GetMessageById(string messageId)
     {
         try
         {
-            var data = await _messageService.GetAsync(id);
-            return Ok(data);
+            var message = await _messageService.GetAsync(messageId);
+            return Ok(message);
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e, "Error occurred while processing the request");
             return BadRequest(e.Message);
         }
     }
     
-    [HttpPost]
-    public async Task<IActionResult> Add([FromBody] MessageRequest request)
+    [HttpPost("CreateMessage")]
+    public async Task<IActionResult> CreateMessage([FromBody] MessageRequest request)
     {
         try
         {
@@ -72,13 +59,13 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e, "Error occurred while processing the request");
             return BadRequest(e.Message);
         }
     }
     
-    [HttpPut]
-    public async Task<IActionResult> Update([FromBody] MessageUpdateRequest request)
+    [HttpPut("UpdateMessage")]
+    public async Task<IActionResult> UpdateMessage([FromBody] MessageUpdateRequest request)
     {
         try
         {
@@ -87,13 +74,13 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e, "Error occurred while processing the request");
             return BadRequest(e.Message);
         }
     }
     
-    [HttpDelete]
-    public async Task<IActionResult> Delete([FromBody] MessageDeleteRequest request)
+    [HttpDelete("DeleteMessage")]
+    public async Task<IActionResult> DeleteMessage([FromBody] MessageDeleteRequest request)
     {
         try
         {
@@ -102,7 +89,7 @@ public class MessageController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e, "Error occurred while processing the request");
             return BadRequest(e.Message);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using REA.ChatSystem.BLL.DTO.Request;
 using REA.ChatSystem.BLL.Interfaces;
 
@@ -8,10 +9,12 @@ namespace REA.ChatSystem.BLL.Hubs;
 public class ChatHub : Hub
 {
     private readonly IMessageService _messageService;
+    private readonly ILogger<ChatHub> _logger;
 
-    public ChatHub(IMessageService messageService)
+    public ChatHub(IMessageService messageService, ILogger<ChatHub> logger)
     {
         _messageService = messageService;
+        _logger = logger;
     }
 
     public async Task SendMessage(MessageRequest messageRequest)
@@ -25,7 +28,7 @@ public class ChatHub : Hub
         }
         catch (Exception e)
         {
-            Console.WriteLine("Error while sending message: " + e.Message);
+            _logger.LogError(e, "Error while sending message");
             throw;
         }
 
@@ -42,7 +45,7 @@ public class ChatHub : Hub
         }
         catch (Exception e)
         {
-            Console.WriteLine("Error while updating message: " + e.Message);
+            _logger.LogError(e, "Error while updating message");
             throw;
         }
     }
@@ -58,7 +61,7 @@ public class ChatHub : Hub
         }
         catch (Exception e)
         {
-            Console.WriteLine("Error while deleting message: " + e.Message);
+            _logger.LogError(e, "Error while deleting message");
             throw;
         }
     }

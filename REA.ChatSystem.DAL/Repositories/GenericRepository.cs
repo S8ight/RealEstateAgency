@@ -42,7 +42,8 @@ namespace REA.ChatSystem.DAL.Repositories
             var properties = GenerateListOfProperties(GetProperties);
             var deleted = await _connectionFactory.GetConnection().ExecuteAsync($"DELETE FROM {_tableName} WHERE {properties.First()}=@Id", 
                 param: new { Id = id });
-            if (deleted == 0) throw new ArgumentException("Chat with that Id was not found");
+            if (deleted == 0) 
+                throw new ArgumentException("Chat with that Id was not found");
         }
 
 

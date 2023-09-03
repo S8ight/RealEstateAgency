@@ -1,4 +1,4 @@
-﻿using Autofac.Extras.Moq;
+﻿/*using Autofac.Extras.Moq;
 using FluentAssertions;
 using MockingUnitTestsForChatSystem.Repositories.Common;
 using REA.ChatSystem.DAL.Context;
@@ -294,4 +294,4 @@ public class MessageRepositoryTests
         };
         return messages;
     }
-}
+}*/

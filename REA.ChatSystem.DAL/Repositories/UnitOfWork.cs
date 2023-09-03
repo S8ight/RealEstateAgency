@@ -5,7 +5,7 @@ namespace REA.ChatSystem.DAL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IDbTransaction DbTransaction;
+        private readonly IDbTransaction _dbTransaction;
 
         public IChatRepository ChatRepository { get; set; }
 
@@ -19,7 +19,7 @@ namespace REA.ChatSystem.DAL.Repositories
             IMessageRepository messageRepository,
             IUserRepository userRepository)
         {
-            DbTransaction = dbTransaction;
+            _dbTransaction = dbTransaction;
             ChatRepository = chatRepository;
             MessageRepository = messageRepository;
             UserRepository = userRepository;
@@ -29,20 +29,20 @@ namespace REA.ChatSystem.DAL.Repositories
         {
             try
             {
-                DbTransaction.Commit();
+                _dbTransaction.Commit();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                DbTransaction.Rollback();
+                _dbTransaction.Rollback();
             }
         }
 
         public void Dispose()
         {
-            DbTransaction.Connection?.Close();
-            DbTransaction.Connection?.Dispose();
-            DbTransaction.Dispose();
+            _dbTransaction.Connection?.Close();
+            _dbTransaction.Connection?.Dispose();
+            _dbTransaction.Dispose();
         }
     }
 }

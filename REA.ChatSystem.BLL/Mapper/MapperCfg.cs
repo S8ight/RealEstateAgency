@@ -1,4 +1,4 @@
-﻿using AuthorizationService.BLL.DTO.Request;
+﻿using ApiGateWay.Models;
 using AutoMapper;
 using REA.ChatSystem.BLL.DTO.Request;
 using REA.ChatSystem.BLL.DTO.Response;
@@ -14,9 +14,11 @@ namespace REA.ChatSystem.BLL.Mapper
             CreateMap<Chat, ChatResponse>();
             CreateMap<MessageRequest, Message>();
             CreateMap<Message, MessageResponse>();
-            CreateMap<User, UserResponse>();
+            CreateMap<User, UserResponse>()
+                .ForMember(dest => dest.Photo, opt => opt.Ignore());
             CreateMap<UserRequest, User>();
-            CreateMap<QueueRequest, User>();
+            CreateMap<UserRegistrationQueueModel, User>();
+            CreateMap<UserUpdateQueueModel, User>();
         }
     }
 }

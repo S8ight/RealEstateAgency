@@ -25,32 +25,54 @@ namespace REA.ChatSystem.BLL.Services
             try
             {
                 var chats = await _unitOfWork.ChatRepository.GetAllAsync();
-                return chats?.Select(_mapper.Map<Chat, ChatResponse>);
+                var chatsResponse = chats.Select(_mapper.Map<Chat, ChatResponse>);
+
+                return chatsResponse;
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error occurred while receiving chats");
                 throw;
             }
         }
-
+        
+        public async Task<IEnumerable<ChatResponse>?> GetUserChats(string userId)
+        {
+            try
+            {
+                var chats = await _unitOfWork.ChatRepository.GetUserChats(userId);
+                var chatsResponse = chats.Select(_mapper.Map<Chat, ChatResponse>);
+                
+                return chatsResponse;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error occurred while receiving user chats");
+                throw;
+            }
+        }
+        
         public async Task<ChatResponse> GetByIdAsync(string id)
         {
             try
             {
-                if (id == string.Empty) throw new ArgumentException("ChatId could not be empty");
-            
+                if (id == string.Empty)
+                {
+                    throw new ArgumentException("ChatId could not be empty");
+                }
                 var chat = await _unitOfWork.ChatRepository.GetAsync(id);
+                
                 if (chat == null)
                 {
-                    throw new ArgumentException("Chat with that Id was not found");
+                    throw new ArgumentException("Chat was not found");
                 }
-                var result = _mapper.Map<Chat, ChatResponse>(chat);
-                return result;
+                var chatResponse = _mapper.Map<Chat, ChatResponse>(chat);
+                
+                return chatResponse;
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error occurred while receiving chat: {Id}", id);
                 throw;
             }
         }
@@ -60,18 +82,19 @@ namespace REA.ChatSystem.BLL.Services
             try
             {
                 var chat = _mapper.Map<ChatRequest, Chat>(request);
-                var newChat = await _unitOfWork.ChatRepository.AddAsync(chat);
-                if (newChat == String.Empty)
+                var chatId = await _unitOfWork.ChatRepository.AddAsync(chat);
+                
+                if (chatId == String.Empty)
                 {
-                    throw new ArgumentException("Not possible to create chat with this users");
+                    throw new ArgumentException("Not possible to create a chat with these users");
                 }
-
                 _unitOfWork.Commit();
-                return newChat;
+                
+                return chatId;
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error occurred while creating chat");
                 throw;
             }
         }
@@ -81,11 +104,12 @@ namespace REA.ChatSystem.BLL.Services
             try
             {
                 await _unitOfWork.ChatRepository.DeleteAsync(id);
+                
                 _unitOfWork.Commit();
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error occurred while deleting chat");
                 throw;
             }
         }

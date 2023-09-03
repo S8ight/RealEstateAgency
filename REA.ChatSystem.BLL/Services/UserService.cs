@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using REA.ChatSystem.BLL.DTO.Request;
 using REA.ChatSystem.BLL.DTO.Response;
@@ -26,11 +27,18 @@ namespace REA.ChatSystem.BLL.Services
             try
             {
                 var user = await _unitOfWork.UserRepository.GetAsync(id);
-                return _mapper.Map<User, UserResponse>(user);
+                var userResponse =  _mapper.Map<User, UserResponse>(user);
+                
+                if (user.Photo != null)
+                {
+                    userResponse.Photo = new FileContentResult(user.Photo, "image/jpeg");   
+                }
+
+                return userResponse;
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error occurred while receiving user: {Id}", id);
                 throw;
             }
         }
@@ -39,14 +47,15 @@ namespace REA.ChatSystem.BLL.Services
         {
             try
             {
-                var model = _mapper.Map<UserRequest, User>(request);
-                var newId = await _unitOfWork.UserRepository.AddAsync(model);
+                var user = _mapper.Map<UserRequest, User>(request);
+                var newUserId = await _unitOfWork.UserRepository.AddAsync(user);
                 _unitOfWork.Commit();
-                return newId;
+                
+                return newUserId;
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error occurred while creating user");
                 throw;
             }
         }
@@ -60,7 +69,7 @@ namespace REA.ChatSystem.BLL.Services
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error occurred while deleting user: {Id}", id);
                 throw;
             }
         }
@@ -70,12 +79,12 @@ namespace REA.ChatSystem.BLL.Services
             try
             {
                 var model = _mapper.Map<UserRequest, User>(request);
-                var newId = await _unitOfWork.UserRepository.ReplaceAsync(model);
+                await _unitOfWork.UserRepository.ReplaceAsync(model);
                 _unitOfWork.Commit();
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error occurred while updating user: {Id}", request.Id);
                 throw;
             }
         }

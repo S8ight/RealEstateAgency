@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using REA.ChatSystem.BLL.DTO.Request;
 using REA.ChatSystem.BLL.DTO.Response;
+using REA.ChatSystem.BLL.Hubs;
 using REA.ChatSystem.BLL.Interfaces;
 using REA.ChatSystem.DAL.Interfaces;
 using REA.ChatSystem.DAL.Models;
@@ -11,49 +14,97 @@ namespace REA.ChatSystem.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IHubContext<ChatHub> _hubContext;
+        private readonly ILogger<MessageService> _logger;
 
-        public MessageService(IUnitOfWork unitOfWork, IMapper mapper)
+        public MessageService(IUnitOfWork unitOfWork, IMapper mapper, IHubContext<ChatHub> hubContext, ILogger<MessageService> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _hubContext = hubContext;
+            _logger = logger;
         }
-        public async Task<IEnumerable<MessageResponse>> GetAllAsync()
-        {
-            var message = await _unitOfWork.MessageRepository.GetAllAsync();
-            return message?.Select(_mapper.Map<Message, MessageResponse>);
-        }
-        
+
         public async Task<IEnumerable<MessageResponse>> GetAllMessagesForChatAsync(string chatId)
         {
-            var message = await _unitOfWork.MessageRepository.GetMessagesOfChat(chatId);
-            return message?.Select(_mapper.Map<Message, MessageResponse>);
+            try
+            {
+                var messages = await _unitOfWork.MessageRepository.GetMessagesOfChat(chatId);
+                var messagesResponse = messages.Select(_mapper.Map<Message, MessageResponse>);
+
+                return messagesResponse;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error occurred while receiving chat({Id}) messages", chatId);
+                throw;
+            }
         }
 
         public async Task<MessageResponse> GetAsync(string id)
         {
-            var message = await _unitOfWork.MessageRepository.GetAsync(id);
-            return _mapper.Map<Message, MessageResponse>(message);
+            try
+            {
+                var message = await _unitOfWork.MessageRepository.GetAsync(id);
+                var messageResponse = _mapper.Map<Message, MessageResponse>(message);
+
+                return messageResponse;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error occurred while receiving chatMessage: {Id}", id);
+                throw;
+            }
         }
 
-        public async Task UpdateAsync(MessageRequest request)
+        public async Task UpdateAsync(MessageUpdateRequest request)
         {
-            var message = _mapper.Map<MessageRequest, Message>(request);
-            await _unitOfWork.MessageRepository.ReplaceAsync(message);
-            _unitOfWork.Commit();
+            try
+            {
+                var message = await _unitOfWork.MessageRepository.GetAsync(request.MessageId);
+                message.MessageBody = request.MessageBody;
+                
+                await _unitOfWork.MessageRepository.ReplaceAsync(message);
+                _unitOfWork.Commit();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error occurred while updating chatMessage: {Id}", request.MessageId);
+                throw;
+            }
+
         }
 
         public async Task<string> AddAsync(MessageRequest request)
         {
-            var message = _mapper.Map<MessageRequest, Message>(request);
-            var newId = await _unitOfWork.MessageRepository.AddAsync(message);
-            _unitOfWork.Commit();
-            return newId;
+            try
+            {
+                var message = _mapper.Map<MessageRequest, Message>(request);
+                
+                var messageId = await _unitOfWork.MessageRepository.AddAsync(message);
+                _unitOfWork.Commit();
+
+                return messageId;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error occurred while creating chatMessage");
+                throw;
+            }
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteAsync(MessageDeleteRequest request)
         {
-            await _unitOfWork.MessageRepository.DeleteAsync(id);
-            _unitOfWork.Commit();
+            try
+            {
+                await _unitOfWork.MessageRepository.DeleteAsync(request.MessageId);
+                _unitOfWork.Commit();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error occurred while deleting chatMessage: {Id}", request.MessageId);
+                throw;
+            }
         }
     }
 }

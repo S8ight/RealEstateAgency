@@ -29,55 +29,71 @@ namespace REA.ChatSystem.DAL.Repositories
                     cmd.Parameters.AddWithValue("@LastName", t.LastName);
                     cmd.Parameters.AddWithValue("@Photo", t.Photo);
                     cmd.ExecuteNonQuery();
+                    
+                    if (cmd.ExecuteNonQuery() == 0)
+                    {
+                        connection.Close();
+                        throw new InvalidOperationException("User was not created successfully.");
+                    }
                 }
                 connection.Close();
             }
             return t.Id;
         }
-        
-        public async Task<Task> DeleteAsync(string id)
+
+        public async Task DeleteAsync(string id)
         {
+            var sql = "DELETE FROM [User] WHERE Id = @Id";
+            using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
-                var sql = "DELETE FROM [User] WHERE Id = @Id";
-                using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
+                connection.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
-                    connection.Open();
-                    using (SqlCommand cmd = new SqlCommand(sql, connection))
+                    cmd.CommandText = sql;
+                    cmd.Prepare();
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected == 0)
                     {
-                        cmd.CommandText = sql;
-                        cmd.Prepare();
-                        cmd.Parameters.AddWithValue("@Id", id);
-                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                        throw new InvalidOperationException($"User with Id {id} not found for deletion");
                     }
-                    connection.Close();
                 }
-                return Task.CompletedTask;
+                connection.Close();
             }
         }
+
         
         public async Task<User> GetAsync(string Id)
         {
-            User user = new User();
             var sql = "SELECT * FROM [User] WHERE Id = @Id";
             using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
             {
                 connection.Open();
-                using (SqlCommand cmd = new SqlCommand(sql,connection))
+                using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@Id", Id);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        if (reader.Read())
                         {
-                            user.Id = Convert.ToString(reader["Id"]);
-                            user.FirstName = Convert.ToString(reader["FirstName"]);
-                            user.LastName = Convert.ToString(reader["LastName"]);
-                            //user.Photo = Convert.ToByte(reader["Photo"]);
+                            User user = new User
+                            {
+                                Id = Convert.ToString(reader["Id"]),
+                                FirstName = Convert.ToString(reader["FirstName"]),
+                                LastName = Convert.ToString(reader["LastName"]),
+                                Photo = reader["Photo"] as byte[]
+                            };
+                            connection.Close();
+                            return user;
+                        }
+                        else
+                        {
+                            connection.Close();
+                            throw new InvalidOperationException($"User with Id {Id} not found");
                         }
                     }
                 }
-                connection.Close();
-                return user;
             }
         }
         
@@ -85,7 +101,7 @@ namespace REA.ChatSystem.DAL.Repositories
         public async Task<Task> ReplaceAsync(User t)
         {
             {
-                var sql = "UPDATE User SET Id = @Id,FirstName = @FirstName,LastName = @LastName,Photo = @Photo";
+                var sql = "UPDATE [User] SET FirstName = @FirstName, LastName = @LastName, Photo = @Photo WHERE Id = @Id";
                 using (var connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection")))
                 {
                     connection.Open();
@@ -94,10 +110,16 @@ namespace REA.ChatSystem.DAL.Repositories
                         cmd.CommandText = sql;
                         cmd.Prepare();
                         cmd.Parameters.AddWithValue("@Id", t.Id);
-                        cmd.Parameters.AddWithValue("@Name", t.FirstName);
+                        cmd.Parameters.AddWithValue("@FirstName", t.FirstName);
                         cmd.Parameters.AddWithValue("@LastName", t.LastName);
                         cmd.Parameters.AddWithValue("@Photo", t.Photo);
                         cmd.ExecuteNonQuery();
+                        
+                        if (cmd.ExecuteNonQuery() == 0)
+                        {
+                            connection.Close();
+                            throw new InvalidOperationException("User was not updated successfully.");
+                        }
                     }
                     connection.Close();
                 }

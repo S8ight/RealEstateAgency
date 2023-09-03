@@ -7,6 +7,7 @@ namespace REA.ChatSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class ChatController : ControllerBase
 {
     private readonly ILogger<ChatController> _logger;
@@ -16,51 +17,61 @@ public class ChatController : ControllerBase
         _chatService = chatService;
         _logger = logger;
     }
-    
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+
+    [HttpGet("GetUserChats/{UserId}")]
+    public async Task<IActionResult> GetUserChats(string userId)
     {
-        var data = await _chatService.GetAllAsync();
+        try
+        {
+            var chats = await _chatService.GetUserChats(userId);
 
-        return Ok(data);
+            if (chats != null && !chats.Any())
+            {
+                return Ok("User still has no chats.");
+            } 
+        
+            return Ok(chats);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error occurred while processing the request");
+            return BadRequest(e.Message);
+        }
     }
-
-    [Authorize]
-    [HttpGet("{id}")]
+    
+    [HttpGet("GetChat/{id}")]
     public async Task<IActionResult> GetById(string id)
     {
         try
         {
-            var data = await _chatService.GetByIdAsync(id);
+            var chat = await _chatService.GetByIdAsync(id);
         
-            return Ok(data);
+            return Ok(chat);
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e, "Error occurred while processing the request");
             return BadRequest(e.Message);
         }
     }
 
-    [Authorize]
-    [HttpPost]
-    public async Task<IActionResult> Add([FromBody] ChatRequest request)
+    [HttpPost("CreateChat")]
+    public async Task<IActionResult> CreateChat([FromBody] ChatRequest request)
     {
         try
         {
-            var data = await _chatService.AddAsync(request);
-            return Ok(data);
+            var chatId = await _chatService.AddAsync(request);
+            return Ok(chatId);
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e, "Error occurred while processing the request");
             return BadRequest(e.Message);
         }
     }
-
-    [Authorize]
-    [HttpDelete]
-    public async Task<IActionResult> Delete(string id)
+    
+    [HttpDelete("DeleteChat")]
+    public async Task<IActionResult> DeleteChat(string id)
     {
         try
         {
@@ -69,7 +80,7 @@ public class ChatController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            _logger.LogError(e, "Error occurred while processing the request");
             return BadRequest(e.Message);
         }
     }
