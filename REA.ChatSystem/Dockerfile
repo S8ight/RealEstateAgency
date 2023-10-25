@@ -8,13 +8,18 @@ WORKDIR /src
 COPY ["REA.ChatSystem/REA.ChatSystem.csproj", "REA.ChatSystem/"]
 COPY ["REA.ChatSystem.BLL/REA.ChatSystem.BLL.csproj", "REA.ChatSystem.BLL/"]
 COPY ["REA.ChatSystem.DAL/REA.ChatSystem.DAL.csproj", "REA.ChatSystem.DAL/"]
+COPY ["ApiGateWay/ApiGateWay.csproj", "ApiGateWay/"]
 RUN dotnet restore "REA.ChatSystem/REA.ChatSystem.csproj"
 COPY . .
 WORKDIR "/src/REA.ChatSystem"
 RUN dotnet build "REA.ChatSystem.csproj" -c Release -o /app/build
 
+#WORKDIR "/src"
+#RUN dotnet dotnet-ef migrations add ChatServiceMigration -p REA.ChatSystem.DAL -s REA.ChatSystem -c AgencyContext
+#RUN dotnet dotnet-ef database update -p REA.ChatSystem.DAL -s REA.ChatSystem -c AgencyContext
+
 FROM build AS publish
-RUN dotnet publish "REA.ChatSystem.csproj" -c Release -o /app/publish
+RUN dotnet publish "REA.ChatSystem.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

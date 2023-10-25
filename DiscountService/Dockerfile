@@ -6,14 +6,13 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["DiscountService/DiscountService.csproj", "DiscountService/"]
-COPY ["DiscountGrpcService/DiscountGrpcService.csproj", "DiscountGrpcService/"]
 RUN dotnet restore "DiscountService/DiscountService.csproj"
 COPY . .
 WORKDIR "/src/DiscountService"
 RUN dotnet build "DiscountService.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DiscountService.csproj" -c Release -o /app/publish
+RUN dotnet publish "DiscountService.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

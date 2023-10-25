@@ -1,13 +1,13 @@
 version: "3.4"
 services:
-  MSSQLDataBase: 
+  MSSQLDataBase:
     container_name: MSSQLDataBase
     image: mcr.microsoft.com/mssql/server:2019-latest
-    environment: 
+    environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=msSQL123
-    ports: 
-      - 1337:1433
+    ports:
+      - "1337:1433"
     volumes:
       - ./REA.mssql_data:/data:/var/opt/mssql/data
       - ./REA.mssql_data:/log:/var/opt/mssql/log
@@ -16,92 +16,27 @@ services:
   MongoDataBase:
     container_name: MongoDataBase
     image: mongo
-    ports: 
-      - 27017:27017
+    ports:
+      - "27017:27017"
     volumes:
-        - ./REA.mongo_data:/data/db
+      - ./REA.mongo_data:/data/db
 
 
   RedisDataBase:
     container_name: RedisDataBase
     image: redis
-    ports: 
-      - 1335:6379
+    ports:
+      - "1335:6379"
 
-  RabbitMQMessageBroker:
-    container_name: RabbitMQMessageBroker
+  RabbitMQ:
+    container_name: RabbitMQ
     tty: true
     hostname: rabbitmq
     image: rabbitmq:3-management
-    ports: 
-      - 1334:5672
-      - 5672:5672
-      - 15672:15672
-
-  REA.ChatSystem:
-    container_name: REA.ChatSystem
-    image: ${DOCKER_REGISTRY-}chatsystem
-    build: 
-      context: .
-      dockerfile: REA.ChatSystem/Dockerfile
     ports:
-      - 1554:80
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:DefaultConnection=Data Source=MSSQLDataBase;Initial Catalog=AgencyChatSystem;User Id=SA;Password=msSQL123;TrustServerCertificate=True;"
-      - "ConnectionStrings:RabbitMQConnection=rabbitmq://rabbitmq:5672;"
-
-  DiscountGrpcService:
-    container_name: DiscountGrpcService
-    image: ${DOCKER_REGISTRY-}discountgrpcservice
-    build:
-      context: .
-      dockerfile: DiscountGrpcService/Dockerfile
-    ports:
-      - 7188:80
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:Redis=RedisDataBase://RedisDataBase:1335"
-      - "Kestrel:Endpoints:Grpc:Url=http://localhost:7180"
-      - "Kestrel:Endpoints:Grpc:Protocols=Http2"
-      - "Kestrel:Endpoints:Http:Url=http://localhost:5013"
-      - "Kestrel:Endpoints:Https:Url=http://localhost:5001"
-
-  REA.AdvertSystem:
-    container_name: REA.AdvertSystem
-    image: ${DOCKER_REGISTRY-}advertsystem
-    build: 
-      context: .
-      dockerfile: REA.AdvertSystem/Dockerfile
-    ports:
-      - 1553:80
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "AdvertDatabase:ConnectionString=mongodb://MongoDataBase:27017"
-      - "ConnectionStrings:RabbitMQConnection=rabbitmq://rabbitmq:5672"
-      - "ConnectionStrings:Redis=RedisDataBase://RedisDataBase:1335"
-
-  REA.AuthorizationSystem:
-    container_name: REA.AuthorizationSystem
-    image: ${DOCKER_REGISTRY-}authorizationsystem
-    build: 
-      context: .
-      dockerfile: REA.AuthorizationSystem/Dockerfile
-    ports:
-      - 1555:80
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:DefaultConnection=Data Source=MSSQLDataBase,1337;Initial Catalog=AgencyUserSystem;User Id=SA; Password=msSQL123; TrustServerCertificate=True;"
-      - "ConnectionStrings:RabbitMQConnection=rabbitmq://rabbitmq:5672;"
-
-  ApiGateWay:
-    container_name: ApiGateWay
-    image: ${DOCKER_REGISTRY-}apigateway
-    build:
-      context: .
-      dockerfile: ApiGateWay/Dockerfile
-    ports:
-      - 8088:80
+      - "1334:5672"
+      - "5672:5672"
+      - "15672:15672"
 
   ElasticSearch:
     container_name: ElasticSearch
@@ -112,7 +47,7 @@ services:
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xms512m"
     ports:
-      - 9200:9200
+      - "9200:9200"
 
   Kibana:
     container_name: Kibana
@@ -122,4 +57,4 @@ services:
     environment:
       - ELASTICSEARCH_URL=http://localhost:9200/
     ports:
-      - 5601:5601
+      - "5601:5601"

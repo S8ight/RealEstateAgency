@@ -1,0 +1,82 @@
+version: "3.4"
+services:
+  REA.ChatService:
+    container_name: REA.ChatService
+    image: ${DOCKER_REGISTRY-}chat-service
+    build:
+      context: .
+      dockerfile: REA.ChatSystem/Dockerfile
+    ports:
+      - "1554:80"
+    depends_on:
+      - MSSQLDataBase
+      - RabbitMQ
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=MSSQLDataBase,1337; Initial Catalog=AgencyChatSystem; User Id=SA; Password=msSQL123; TrustServerCertificate=True;"
+      - "ConnectionStrings:RabbitMQConnection=amqp://guest:guest@RabbitMQ:5672/"
+
+  REA.DiscountService:
+    container_name: REA.DiscountService
+    image: ${DOCKER_REGISTRY-}discount-grpc-service
+    build:
+      context: .
+      dockerfile: DiscountService/Dockerfile
+    ports:
+      - "7188:80"
+    depends_on:
+      - MongoDataBase
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "AdvertDatabase:ConnectionString=mongodb://MongoDataBase:27017"
+      - "Kestrel:Endpoints:Grpc:Url=http://localhost:7180"
+      - "Kestrel:Endpoints:Grpc:Protocols=Http2"
+      - "Kestrel:Endpoints:Http:Url=http://localhost:5013"
+      - "Kestrel:Endpoints:Https:Url=http://localhost:5001"
+
+  REA.AdvertService:
+    container_name: REA.AdvertService
+    image: ${DOCKER_REGISTRY-}advert-service
+    build:
+      context: .
+      dockerfile: REA.AdvertSystem/Dockerfile
+    ports:
+      - "1553:80"
+    depends_on:
+      - MongoDataBase
+      - RabbitMQ
+      - RedisDataBase
+      - REA.DiscountService
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "AdvertDatabase:ConnectionString=mongodb://MongoDataBase:27017"
+      - "ConnectionStrings:RabbitMQConnection=amqp://guest:guest@RabbitMQ:5672/"
+      - "ConnectionStrings:Redis=RedisDataBases://RedisDataBase:1335"
+      - "ConnectionStrings:Grpc=grpc://DiscountService:7188"
+
+  REA.AuthorizationService:
+    container_name: REA.AuthorizationService
+    image: ${DOCKER_REGISTRY-}authorization-service
+    build:
+      context: .
+      dockerfile: REA.AuthorizationSystem/Dockerfile
+    ports:
+      - "1555:80"
+    depends_on:
+      - MongoDataBase
+      - RabbitMQ
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Data Source=MSSQLDataBase,1337;Initial Catalog=AgencyUserService;User Id=SA; Password=msSQL123; TrustServerCertificate=True;"
+      - "RabbitMQ:ConnectionString=amqp://guest:guest@RabbitMQ:5672/"
+
+  ApiGateWay:
+    container_name: ApiGateWay
+    image: ${DOCKER_REGISTRY-}api-gate-way
+    build:
+      context: .
+      dockerfile: ApiGateWay/Dockerfile
+    ports:
+      - "8088:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
