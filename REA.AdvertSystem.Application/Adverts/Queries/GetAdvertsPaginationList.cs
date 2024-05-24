@@ -1,7 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Text.Json;
+using AutoMapper;
+using Gridify;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using REA.AdvertSystem.Application.Common.DTO.AdvertDTO;
 using REA.AdvertSystem.Application.Common.Interfaces;
 using REA.AdvertSystem.Application.Common.Models;
@@ -9,13 +12,12 @@ using REA.AdvertSystem.Domain.Entities;
 
 namespace REA.AdvertSystem.Application.Adverts.Queries
 {
-    public record GetAdvertsPaginationList : IRequest<PaginatedList<AdvertListResponse>>
+    public record GetAdvertsPaginationList : IRequest<PaginationResponse<AdvertListResponse>>
     {
-        public int PageNumber { get; init; } = 1;
-        public int PageSize { get; init; } = 10;
+        public SearchParams SearchParams { get; set; }
     }
 
-    public class GetAdvertsPaginationListHandler : IRequestHandler<GetAdvertsPaginationList, PaginatedList<AdvertListResponse>>
+    public class GetAdvertsPaginationListHandler : IRequestHandler<GetAdvertsPaginationList, PaginationResponse<AdvertListResponse>>
     {
         private IMongoCollection<Advert> Advert { get; }
 
@@ -30,15 +32,41 @@ namespace REA.AdvertSystem.Application.Adverts.Queries
             _logger = logger;
         }
 
-        public async Task<PaginatedList<AdvertListResponse>> Handle(GetAdvertsPaginationList request, CancellationToken cancellationToken)
+        public async Task<PaginationResponse<AdvertListResponse>> Handle(GetAdvertsPaginationList request, CancellationToken cancellationToken)
         {
             try
             {
-                var paginatedAdvertList = await PaginatedList<Advert>.GetPagerResultAsync(request.PageNumber, request.PageSize, Advert);
+                IQueryable<Advert> adverts = Advert.AsQueryable();
                 
-                var mappedList = Mapper.Map<PaginatedList<Advert>, PaginatedList<AdvertListResponse>>(paginatedAdvertList);
+                if (request.SearchParams.ColumnFilters != null)
+                {
+                    var columnFilters = new List<ColumnFilter>();
+                
+                    columnFilters.AddRange(JsonSerializer.Deserialize<List<ColumnFilter>>(request.SearchParams.ColumnFilters)!);
+                    
+                    string filterString = string.Join(", ", columnFilters.Select(filter => $"{filter.id} = {filter.value}"));
+                    adverts = adverts.ApplyFiltering(filterString);
+                }
+                
+                if (request.SearchParams.SearchTerm != null)
+                {
+                    adverts = adverts.ApplyFiltering($"Name =* {request.SearchParams.SearchTerm}/i | Adress =* {request.SearchParams.SearchTerm}/i | Country =* {request.SearchParams.SearchTerm}/i | EstateType =* {request.SearchParams.SearchTerm}/i");
+                }
 
-                return mappedList;
+                if (request.SearchParams.ColumnSorting != null)
+                {
+                    adverts = adverts.ApplyOrdering($"{request.SearchParams.ColumnSorting.ColumnName} {request.SearchParams.ColumnSorting.Desc}");
+                }
+
+                var pagedAdverts = adverts.ApplyPaging(request.SearchParams.PageNumber, request.SearchParams.PageSize);
+
+                var mappedAdverts = Mapper.Map<List<Advert>, List<AdvertListResponse>>(pagedAdverts.ToList());
+
+                return new PaginationResponse<AdvertListResponse>
+                {
+                    PagesCount = (int)Math.Ceiling((double)adverts.Count() / request.SearchParams.PageSize),
+                    Items = mappedAdverts
+                };
             }
             catch (Exception e)
             {

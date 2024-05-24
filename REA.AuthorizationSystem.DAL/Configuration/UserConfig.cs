@@ -19,14 +19,8 @@ class UserConfig : IEntityTypeConfiguration<User>
         builder.Property(u => u.Patronymic)
             .HasMaxLength(30);
 
-        builder.Property(u => u.DateOfBirth)
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("GETDATE()")
-            .IsRequired();
-
         builder.Property(u => u.Created)
             .HasColumnType("datetime")
-            .HasDefaultValueSql("GETDATE()")
-            .IsRequired();
+            .HasDefaultValueSql("GETDATE()");
     }
 }

@@ -56,10 +56,10 @@ public class UserValidation : AbstractValidator<RegistrationRequest>
             .Length(4, 30)
             .WithMessage("{PropertyName} should be between {MinLength} and {MaxLength} characters.");
 
-        RuleFor(p => p.DateOfBirth)
-            .Cascade(CascadeMode.Stop)
-            .NotEmpty()
-            .WithMessage("{PropertyName} should be not empty.");
+        // RuleFor(p => p.DateOfBirth)
+        //     .Cascade(CascadeMode.Stop)
+        //     .NotEmpty()
+        //     .WithMessage("{PropertyName} should be not empty.");
         
         RuleFor(p => p.PhoneNumber)
             .Cascade(CascadeMode.Stop)

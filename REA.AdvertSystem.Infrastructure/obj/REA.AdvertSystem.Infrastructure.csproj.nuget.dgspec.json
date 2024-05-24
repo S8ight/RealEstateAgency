@@ -1,138 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\REA.AdvertSystem.Infrastructure.csproj": {}
+    "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\REA.AdvertSystem.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.BLL\\AuthorizationService.BLL.csproj": {
+    "D:\\Projects\\RealEstateAgency\\ApiGateWay\\ApiGateWay.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.BLL\\AuthorizationService.BLL.csproj",
-        "projectName": "AuthorizationService.BLL",
-        "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.BLL\\AuthorizationService.BLL.csproj",
+        "projectUniqueName": "D:\\Projects\\RealEstateAgency\\ApiGateWay\\ApiGateWay.csproj",
+        "projectName": "ApiGateWay",
+        "projectPath": "D:\\Projects\\RealEstateAgency\\ApiGateWay\\ApiGateWay.csproj",
         "packagesPath": "C:\\Users\\fsv18\\.nuget\\packages\\",
-        "outputPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.BLL\\obj\\",
+        "outputPath": "D:\\Projects\\RealEstateAgency\\ApiGateWay\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj": {
-                "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "AutoMapper": {
-              "target": "Package",
-              "version": "[12.0.0, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[12.0.0, )"
-            },
-            "BCrypt.Net": {
-              "target": "Package",
-              "version": "[0.1.0, )"
-            },
-            "MailKit": {
-              "target": "Package",
-              "version": "[3.4.3, )"
-            },
-            "MassTransit": {
-              "target": "Package",
-              "version": "[8.0.10-develop.714, )"
-            },
-            "MassTransit.RabbitMQ": {
-              "target": "Package",
-              "version": "[8.0.10-develop.714, )"
-            },
-            "Microsoft.AspNetCore.Mvc.Core": {
-              "target": "Package",
-              "version": "[2.2.5, )"
-            },
-            "Microsoft.AspNetCore.Mvc.Formatters.Json": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "MimeKit": {
-              "target": "Package",
-              "version": "[3.4.3, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
-            }
-          ],
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj",
-        "projectName": "AuthorizationService.DAL",
-        "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.DAL\\AuthorizationService.DAL.csproj",
-        "packagesPath": "C:\\Users\\fsv18\\.nuget\\packages\\",
-        "outputPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.DAL\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -151,25 +38,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Ocelot": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[18.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Serilog.AspNetCore": {
               "target": "Package",
-              "version": "[6.0.4, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[6.0.4, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.1.1-dev-00293, )"
             }
           },
           "imports": [
@@ -186,44 +61,49 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             }
           ],
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\DiscountGrpcService.csproj": {
+    "D:\\Projects\\RealEstateAgency\\DiscountService\\DiscountService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\DiscountGrpcService.csproj",
-        "projectName": "DiscountGrpcService",
-        "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\DiscountGrpcService.csproj",
+        "projectUniqueName": "D:\\Projects\\RealEstateAgency\\DiscountService\\DiscountService.csproj",
+        "projectName": "DiscountService",
+        "projectPath": "D:\\Projects\\RealEstateAgency\\DiscountService\\DiscountService.csproj",
         "packagesPath": "C:\\Users\\fsv18\\.nuget\\packages\\",
-        "outputPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\obj\\",
+        "outputPath": "D:\\Projects\\RealEstateAgency\\DiscountService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -252,29 +132,57 @@
             },
             "Google.Protobuf": {
               "target": "Package",
-              "version": "[3.21.12, )"
+              "version": "[3.24.2, )"
             },
             "Grpc.AspNetCore": {
               "target": "Package",
-              "version": "[2.40.0, )"
+              "version": "[2.56.0, )"
             },
             "Grpc.Net.Client": {
               "target": "Package",
-              "version": "[2.51.0-pre1, )"
+              "version": "[2.56.0, )"
             },
             "Grpc.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.51.0, )"
+              "version": "[2.58.0-pre1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.4, )"
             },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {
               "target": "Package",
               "version": "[7.0.1, )"
             },
+            "Microsoft.Identity.Web": {
+              "target": "Package",
+              "version": "[1.16.0, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.18.0, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "StackExchange.Redis": {
               "target": "Package",
               "version": "[2.6.86, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
             }
           },
           "imports": [
@@ -291,19 +199,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             }
           ],
           "frameworkReferences": {
@@ -314,42 +222,40 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj": {
+    "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj",
+        "projectUniqueName": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj",
         "projectName": "REA.AdvertSystem.Application",
-        "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj",
+        "projectPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj",
         "packagesPath": "C:\\Users\\fsv18\\.nuget\\packages\\",
-        "outputPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Application\\obj\\",
+        "outputPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.BLL\\AuthorizationService.BLL.csproj": {
-                "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\AuthorizationService.BLL\\AuthorizationService.BLL.csproj"
+              "D:\\Projects\\RealEstateAgency\\ApiGateWay\\ApiGateWay.csproj": {
+                "projectPath": "D:\\Projects\\RealEstateAgency\\ApiGateWay\\ApiGateWay.csproj"
               },
-              "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\DiscountGrpcService.csproj": {
-                "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\DiscountGrpcService.csproj"
+              "D:\\Projects\\RealEstateAgency\\DiscountService\\DiscountService.csproj": {
+                "projectPath": "D:\\Projects\\RealEstateAgency\\DiscountService\\DiscountService.csproj"
               },
-              "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj": {
-                "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj"
+              "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj": {
+                "projectPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj"
               }
             }
           }
@@ -375,6 +281,10 @@
             "FluentValidation.DependencyInjectionExtensions": {
               "target": "Package",
               "version": "[11.4.0, )"
+            },
+            "Gridify": {
+              "target": "Package",
+              "version": "[2.14.1, )"
             },
             "MassTransit": {
               "target": "Package",
@@ -411,15 +321,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             }
           ],
           "frameworkReferences": {
@@ -427,28 +337,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj": {
+    "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
+        "projectUniqueName": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
         "projectName": "REA.AdvertSystem.Domain",
-        "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
+        "projectPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
         "packagesPath": "C:\\Users\\fsv18\\.nuget\\packages\\",
-        "outputPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\obj\\",
+        "outputPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -490,15 +398,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             }
           ],
           "frameworkReferences": {
@@ -506,36 +414,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\REA.AdvertSystem.Infrastructure.csproj": {
+    "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\REA.AdvertSystem.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\REA.AdvertSystem.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\REA.AdvertSystem.Infrastructure.csproj",
         "projectName": "REA.AdvertSystem.Infrastructure",
-        "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\REA.AdvertSystem.Infrastructure.csproj",
+        "projectPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\REA.AdvertSystem.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\fsv18\\.nuget\\packages\\",
-        "outputPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\obj\\",
+        "outputPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj": {
-                "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj"
+              "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj": {
+                "projectPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Application\\REA.AdvertSystem.Application.csproj"
               }
             }
           }
@@ -569,15 +475,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             }
           ],
           "frameworkReferences": {
@@ -585,7 +491,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

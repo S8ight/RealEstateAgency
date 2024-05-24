@@ -62,18 +62,17 @@ public class UserController : ControllerBase
                 return BadRequest(validationResult.ToString());
             }
 
-            var userCreationResult = await _userManager.CreateAsync(
-                new User()
-                {
-                    UserName = request.UserName,
-                    Email = request.Email,
-                    PhoneNumber = request.PhoneNumber,
-                    FirstName = request.FirstName,
-                    LastName = request.LastName,
-                    Patronymic = request.Patronymic,
-                    DateOfBirth = request.DateOfBirth,
-                    Created = DateTime.Now
-                }, request.Password);
+            var newUser = new User
+            {
+                UserName = request.UserName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Patronymic = request.Patronymic
+            };
+            
+            var userCreationResult = await _userManager.CreateAsync(newUser, request.Password);
 
             if (!userCreationResult.Succeeded)
             {
@@ -308,7 +307,7 @@ public class UserController : ControllerBase
         }
 
     }
-    [AllowAnonymous]
+    //[AllowAnonymous]
     [HttpGet("GetUser/{id}")]
     public async Task<IActionResult> GetUserById(string id)
     {
@@ -358,8 +357,7 @@ public class UserController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-
-    [AllowAnonymous]
+    
     [HttpPut("UpdateUser")]
     public async Task<IActionResult> UpdateUser([FromForm] UserUpdateRequest request)
     {

@@ -1,3 +1,4 @@
+/*
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using REA.AdvertSystem.Application.Common.Models;
 using REA.AdvertSystem.Application.PhotoLists.Commands;
 using REA.AdvertSystem.Application.PhotoLists.Queries;
 using REA.AdvertSystem.Application.Users.Queries;
+using AdvertController = REA.AdvertSystem.Controllers.AdvertController;
 
 namespace REA.AdvertSystem.Controllers;
 
@@ -51,7 +53,7 @@ public class AdvertController : ControllerBase
     
     [AllowAnonymous]
     [HttpGet("GetAdvertsList")]
-    public async Task<ActionResult<PaginatedList<AdvertListResponse>>> GetAdvertsList([FromQuery] GetAdvertsPaginationList query)
+    public async Task<ActionResult<PaginationResponse<AdvertListResponse>>> GetAdvertsList([FromQuery] GetAdvertsPaginationList query)
     {
         try
         {
@@ -92,7 +94,6 @@ public class AdvertController : ControllerBase
                 advert.PriceWithDiscount = discount.CalculatedPrice;
                 advert.DiscountExpirationTime = discount.ExpiresAt.ToDateTime();
             }
-
             advert.Seller = await Mediator.Send(new GetUserById { Id = advert.UserId });
 
             return Ok(advert);
@@ -124,7 +125,7 @@ public class AdvertController : ControllerBase
         }
     }
 
-    [HttpPut]
+    [HttpPut("UpdateAdvert")]
     public async Task<ActionResult<string>> UpdateAdvert(UpdateAdvertCommand command)
     {
         try
@@ -138,3 +139,4 @@ public class AdvertController : ControllerBase
         }
     }
 }
+*/

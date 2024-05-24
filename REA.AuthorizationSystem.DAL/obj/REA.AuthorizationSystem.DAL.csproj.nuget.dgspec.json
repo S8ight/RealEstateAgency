@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\REA.AuthorizationSystem.DAL.csproj": {}
+    "D:\\Projects\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\REA.AuthorizationSystem.DAL.csproj": {}
   },
   "projects": {
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\REA.AuthorizationSystem.DAL.csproj": {
+    "D:\\Projects\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\REA.AuthorizationSystem.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\REA.AuthorizationSystem.DAL.csproj",
+        "projectUniqueName": "D:\\Projects\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\REA.AuthorizationSystem.DAL.csproj",
         "projectName": "REA.AuthorizationSystem.DAL",
-        "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\REA.AuthorizationSystem.DAL.csproj",
+        "projectPath": "D:\\Projects\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\REA.AuthorizationSystem.DAL.csproj",
         "packagesPath": "C:\\Users\\fsv18\\.nuget\\packages\\",
-        "outputPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\obj\\",
+        "outputPath": "D:\\Projects\\RealEstateAgency\\REA.AuthorizationSystem.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,23 +44,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.4, )"
             }
           },
           "imports": [
@@ -79,15 +77,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             }
           ],
           "frameworkReferences": {
@@ -95,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -4,7 +4,6 @@ namespace REA.AdvertSystem.Domain.Entities
 {
     public class PhotoList
     {
-        [BsonId]
         public string Id { get; set; }
 
         public string AdvertId { get; set;}

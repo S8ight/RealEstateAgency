@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "xvQCvFSKToQJaSpPuqAD6ULLuZqX0WP25N4GFh0W3QA=",
+  "Hash": "qzHecnHA6NR4pmCN1B4bNM3unRuWUTfsvNAwUWP5pho=",
   "Source": "REA.AuthorizationSystem",
   "BasePath": "_content/REA.AuthorizationSystem",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Projects\\RealEstateAgency\\ApiGateWay\\ApiGateWay.csproj",
+      "Version": 2,
+      "Source": "ApiGateWay",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

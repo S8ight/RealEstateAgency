@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj": {}
+    "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj": {
+    "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
+        "projectUniqueName": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
         "projectName": "REA.AdvertSystem.Domain",
-        "projectPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
+        "projectPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
         "packagesPath": "C:\\Users\\fsv18\\.nuget\\packages\\",
-        "outputPath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\obj\\",
+        "outputPath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\fsv18\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,15 +61,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.11, 6.0.11]"
+              "version": "[6.0.27, 6.0.27]"
             }
           ],
           "frameworkReferences": {
@@ -79,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

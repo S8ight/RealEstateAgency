@@ -1,15 +1,26 @@
 {
   "Version": 1,
-  "Hash": "jCjVWErPra1b1Ic4yZBtZNzG+ZlFAtfhgVm+CBqh7AE=",
+  "Hash": "e1OOckmE8FjeuXCp7FX6n2vJrMAmJg2UN76xfYEwzVI=",
   "Source": "REA.AdvertSystem",
   "BasePath": "_content/REA.AdvertSystem",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\Knowledge\\OOP\\RealEstateAgency\\DiscountGrpcService\\DiscountGrpcService.csproj",
+      "Identity": "D:\\Projects\\RealEstateAgency\\ApiGateWay\\ApiGateWay.csproj",
       "Version": 2,
-      "Source": "DiscountGrpcService",
+      "Source": "ApiGateWay",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    },
+    {
+      "Identity": "D:\\Projects\\RealEstateAgency\\DiscountService\\DiscountService.csproj",
+      "Version": 2,
+      "Source": "DiscountService",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
       "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
@@ -18,6 +29,53 @@
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
     }
   ],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "REA.AdvertSystem\\wwwroot",
+      "Source": "REA.AdvertSystem",
+      "ContentRoot": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem\\wwwroot\\",
+      "BasePath": "_content/REA.AdvertSystem",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem\\wwwroot\\images\\18c51c97-f24d-478f-aa50-3df7b5ed8871\\70ab7fb9-0eea-4ab0-b613-551f9a7ad51a.png",
+      "SourceId": "REA.AdvertSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem\\wwwroot\\",
+      "BasePath": "_content/REA.AdvertSystem",
+      "RelativePath": "images/18c51c97-f24d-478f-aa50-3df7b5ed8871/70ab7fb9-0eea-4ab0-b613-551f9a7ad51a.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\18c51c97-f24d-478f-aa50-3df7b5ed8871\\70ab7fb9-0eea-4ab0-b613-551f9a7ad51a.png"
+    },
+    {
+      "Identity": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem\\wwwroot\\images\\18c51c97-f24d-478f-aa50-3df7b5ed8871\\e8dbc053-b37d-4c9d-9d1c-6a607f164079.png",
+      "SourceId": "REA.AdvertSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem\\wwwroot\\",
+      "BasePath": "_content/REA.AdvertSystem",
+      "RelativePath": "images/18c51c97-f24d-478f-aa50-3df7b5ed8871/e8dbc053-b37d-4c9d-9d1c-6a607f164079.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\18c51c97-f24d-478f-aa50-3df7b5ed8871\\e8dbc053-b37d-4c9d-9d1c-6a607f164079.png"
+    }
+  ]
 }

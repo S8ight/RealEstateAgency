@@ -10,7 +10,7 @@ public class AdvertListResponse
         
     public string Settlement { get; set; }
 
-    public float Square { get; set; }
+    public string Address { get; set; }
 
     public float Price { get; set; }
     

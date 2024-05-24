@@ -22,13 +22,14 @@ public class AutoMapperProfile : Profile
             .ForMember(dest => dest.FirstName, opt => opt.Condition(src => src.FirstName != null))
             .ForMember(dest => dest.LastName, opt => opt.Condition(src => src.LastName != null))
             .ForMember(dest => dest.Patronymic, opt => opt.Condition(src => src.Patronymic != null))
-            .ForMember(dest => dest.DateOfBirth, opt => opt.Condition(src => src.DateOfBirth != null))
             .ForMember(dest => dest.PhoneNumber, opt => opt.Condition(src => src.PhoneNumber != null))
             .ForMember(dest => dest.Photo, opt => opt.Ignore());
             
         CreateMap<User, UserLoginResponse>();
-        CreateMap<User, UserRegistrationQueueModel>();
-        CreateMap<User, UserUpdateQueueModel>();
+        CreateMap<User, UserRegistrationQueueModel>()
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.NormalizedEmail));
+        CreateMap<User, UserUpdateQueueModel>()
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
     }
     
 }

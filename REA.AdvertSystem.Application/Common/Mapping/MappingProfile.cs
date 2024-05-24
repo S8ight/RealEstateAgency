@@ -21,8 +21,9 @@ namespace REA.AdvertSystem.Application.Common.Mapping
         {
             CreateMap<Advert, AdvertResponse>();
             CreateMap<Advert, AdvertListResponse>()
-                .ForMember(dest => dest.PhotoUrl, opt => opt.Ignore());
-            CreateMap<PaginatedList<Advert>, PaginatedList<AdvertListResponse>>();
+                .ForMember(dest => dest.PhotoUrl, opt => opt.Ignore())
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Adress));
+            
             CreateMap<PhotoList, PhotoResponse>();
             CreateMap<SaveList, SaveListResponse>();
             CreateMap<User, UserResponse>()

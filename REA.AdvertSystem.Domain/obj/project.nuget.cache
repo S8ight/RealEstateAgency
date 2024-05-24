@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CwP3kkmIpH/HWJUU7G0eIQOcprycZLty2P1L40ASsHl+lW/5R89OKeBIiOHo4iJJKFTuFK9NxzHLJUde5nu9Tg==",
+  "dgSpecHash": "N3yRdbAq0e4YDlB7XaMhYUP51zLU/TxH5bBCz8VzHJObuHBwop98SHulmY/82AoZ63mqShdGACOcyXuC4A/05g==",
   "success": true,
-  "projectFilePath": "D:\\Knowledge\\OOP\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
+  "projectFilePath": "D:\\Projects\\RealEstateAgency\\REA.AdvertSystem.Domain\\REA.AdvertSystem.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fsv18\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
@@ -10,9 +10,9 @@
     "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\mongodb.bson\\2.18.0\\mongodb.bson.2.18.0.nupkg.sha512",
     "C:\\Users\\fsv18\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
-    "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.11\\microsoft.netcore.app.ref.6.0.11.nupkg.sha512",
-    "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.11\\microsoft.windowsdesktop.app.ref.6.0.11.nupkg.sha512",
-    "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.11\\microsoft.aspnetcore.app.ref.6.0.11.nupkg.sha512"
+    "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\fsv18\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
   ],
   "logs": []
 }

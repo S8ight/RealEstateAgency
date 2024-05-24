@@ -64,7 +64,9 @@ public class TokenService: ITokenService
         {
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.GivenName, user.UserName),
-            new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:RefreshTokenExpirationMinutes"])).ToString(CultureInfo.InvariantCulture))
+            new Claim(JwtRegisteredClaimNames.Exp, 
+                DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["Jwt:RefreshTokenExpirationMinutes"]))
+                    .ToString(CultureInfo.InvariantCulture))
         };
 
         var refreshTokenCredentials = new SigningCredentials(_refreshTokenKey, SecurityAlgorithms.HmacSha512Signature);

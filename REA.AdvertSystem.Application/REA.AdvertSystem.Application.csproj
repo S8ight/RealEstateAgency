@@ -10,6 +10,7 @@
       <PackageReference Include="AutoMapper" Version="12.0.0" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
+      <PackageReference Include="Gridify" Version="2.14.1" />
       <PackageReference Include="MassTransit" Version="8.0.10-develop.714" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
       <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.1" />

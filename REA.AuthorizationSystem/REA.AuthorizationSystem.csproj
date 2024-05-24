@@ -32,4 +32,10 @@
       <ProjectReference Include="..\REA.AuthorizationSystem.DAL\REA.AuthorizationSystem.DAL.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>
