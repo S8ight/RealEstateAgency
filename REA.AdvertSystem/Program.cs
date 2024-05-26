@@ -51,7 +51,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ISaveListService, SaveListService>();
 builder.Services.AddTransient<IPhotoListService, PhotoListService>();
 
-builder.Services.AddMassTransit(x =>
+/*builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<UserRegistrationConsumer>();
     x.AddConsumer<UserUpdateConsumer>();
@@ -70,7 +70,7 @@ builder.Services.AddMassTransit(x =>
         });
 
     });
-});
+});*/
 
 // builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
 // (g =>

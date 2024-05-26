@@ -5,5 +5,5 @@ public enum EstateType
     Apartment,
     House,
     Garage,
-    Others
+    Other
 }

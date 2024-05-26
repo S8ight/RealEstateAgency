@@ -31,6 +31,8 @@ public class AdvertResponse
     public DateTime Created { get; set; }
 
     public string EstateType { get; set; }
+    public string ConditionType { get; set; }
+    public string ActionType { get; set; }
 
     public List<string> PhotoList { get; set; }
 

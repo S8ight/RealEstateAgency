@@ -33,6 +33,8 @@ public class Advert
     public string UserId { get; set; }
 
     public EstateType EstateType { get; set; }
+    public ConditionType ConditionType { get; set; }
+    public ActionType ActionType { get; set; }
     
     public virtual ICollection<PhotoList>? PhotoList { get; set; }
     public virtual ICollection<SaveList>? SaveLists { get; set; }

@@ -8,7 +8,7 @@ namespace REA.AdvertSystem.Controllers;
 
 [ApiController]
 [Route("api/v1")]
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class UsersController : ControllerBase
 { 
     private readonly IUserService _userService;

@@ -29,4 +29,6 @@ public class AdvertRequest
     public float Price { get; set; }
     
     public EstateType EstateType { get; set; }
+    public ActionType ActionType { get; set; }
+    public ConditionType ConditionType { get; set; }
 }

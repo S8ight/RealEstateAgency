@@ -25,7 +25,11 @@ public class MapperProfile :  Profile
                 opt => opt.MapFrom(src => src.EstateType.ToString()))
             .ForMember(dest => dest.PhotoList,
                 opt => opt.MapFrom(src => src.PhotoList!.Select(x => x.PhotoUrl).ToList()))
-            .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => src.User));
+            .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => src.User))
+            .ForMember(dest => dest.ActionType,
+                opt => opt.MapFrom(src => src.ActionType.ToString()))
+            .ForMember(dest => dest.ConditionType,
+                opt => opt.MapFrom(src => src.ConditionType.ToString()));
 
         CreateMap<AdvertRequest, Advert>();
         
