@@ -10,6 +10,6 @@
 
         public byte[]? Photo { get; set; }
         
-        //public List<Chat> Chat { get; set; }
+        public List<Chat> Chat { get; set; }
     }
 }

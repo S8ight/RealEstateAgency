@@ -59,6 +59,16 @@ builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+for (int i = 0; i < 50; i++)
+{
+    Console.WriteLine(builder.Configuration.GetConnectionString("RabbitMQConnection"));
+    
+}
+
+Console.WriteLine(builder.Environment.EnvironmentName);
+Console.WriteLine(builder.Environment.EnvironmentName);
+Console.WriteLine(builder.Environment.EnvironmentName);
+
 builder.Services.AddMassTransit(x =>
 {
     
@@ -68,7 +78,7 @@ builder.Services.AddMassTransit(x =>
   
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host(builder.Configuration["ConnectionStrings:RabbitMQConnection"]);
+        cfg.Host(builder.Configuration.GetConnectionString("RabbitMQConnection"));
   
         cfg.ReceiveEndpoint("chat-user-queue", ep =>
         {

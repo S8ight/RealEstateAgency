@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace REA.ChatSystem.DAL.Context;
+namespace REA.ChatSystem.DAL.Interfaces;
 
 public interface IDatabaseConnectionFactory
 {

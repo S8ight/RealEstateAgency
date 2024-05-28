@@ -10,5 +10,7 @@ public class UserUpdateRequest
     public string? Patronymic { get; set; }
     public IFormFile? Photo { get; set; }
     public DateTime? DateOfBirth { get; set; }
+    
+    public string? Email { get; set; }
     public string? PhoneNumber { get; set; }
 }

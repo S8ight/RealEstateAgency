@@ -1,0 +1,494 @@
+﻿{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:8088",
+    "CorsOptions": {
+      "PolicyName": "AllowAll",
+      "AllowedOrigins": [ "http://localhost:3000" ],
+      "AllowAnyHeader": true,
+      "AllowAnyMethod": true
+    }
+  },
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Chat/GetUserChats/{UserId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/Chats/{UserId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 10 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Chat/GetChat/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/Chat/{id}",
+      "UpstreamHttpMethod": [ "GET"],
+      "FileCacheOptions": { "TtlSeconds": 300 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Chat/CreateChat",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateChat",
+      "UpstreamHttpMethod": [ "POST"]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Chat/DeleteChat/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteChat/{id}",
+      "UpstreamHttpMethod": [ "DELETE"]
+    },
+
+
+
+    {
+      "DownstreamPathTemplate": "/chathub",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/chathub",
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"],
+      "UpstreamHost": "localhost",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Message/GetChatMessages/{chatId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetChatMessages/{chatId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Message/GetMessage/{messageId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetMessage/{messageId}",
+      "UpstreamHttpMethod": [ "GET"],
+      "FileCacheOptions": { "TtlSeconds": 60 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Message/CreateMessage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateMessage",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Message/UpdateMessage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdateMessage",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Message/DeleteMessage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7031"
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteMessage",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+
+    
+    
+    {
+      "DownstreamPathTemplate": "/api/Advert/CreateAdvert",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateAdvert",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Advert/GetAdvertsList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAdvertsList",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Advert/GetAdvert/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAdvert/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 60 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Advert/DeleteAdvert",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteAdvert",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Advert/UpdateAdvert",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdateAdvert",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    
+    
+    
+    {
+      "DownstreamPathTemplate": "/api/PhotoList/CreatePhotoList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/CreatePhotoList",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    { 
+      "DownstreamPathTemplate": "/api/PhotoList/GetAllAdvertPhotos",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllAdvertPhotos",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 60 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/PhotoList/DeletePhotoList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/DeletePhotoList",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/PhotoList/UpdatePhotoList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdatePhotoList",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    
+    
+    
+    {
+      "DownstreamPathTemplate": "/api/SaveList/CreateSaveList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/CreateSaveList",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/SaveList/GetSaveListAdverts",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetSaveListAdverts",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 10 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/SaveList/DeleteSaveListRecord",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7152"
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteSaveListRecord",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    
+    
+    
+    {
+      "DownstreamPathTemplate": "/api/User/Register",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/Register",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/ConfirmEmail",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/ConfirmEmail",
+      "UpstreamHttpMethod": [ "GET" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "PeriodTimespan": 10,
+        "Limit": 3
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/LoginWithCredentials",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/LoginWithCredentials",
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "60s",
+        "PeriodTimespan": 60,
+        "Limit": 5
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/RefreshAccessToken",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/RefreshAccessToken",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/LoginWithAccessToken",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/LoginWithAccessToken",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/ForgotPassword",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/ForgotPassword",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/PasswordReset",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/AuthorizationSystem/User/PasswordReset",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/GetUser/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetUser/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/GetUserPhoto/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetUserPhoto/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/UpdateUser",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7119"
+        }
+      ],
+      "UpstreamPathTemplate": "/UpdateUser",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/GetAdvertDiscounts/{advertId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7072"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAdvertDiscounts/{advertId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/GetAdvertCurrentDiscount/{advertId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7072"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAdvertCurrentDiscount/{advertId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/GetDiscountById/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7072"
+        }
+      ],
+      "UpstreamPathTemplate": "/GetDiscountById/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/AddDiscount",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7072"
+        }
+      ],
+      "UpstreamPathTemplate": "/AddDiscount",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Discount/DeleteDiscount/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7072"
+        }
+      ],
+      "UpstreamPathTemplate": "/DeleteDiscount/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    }
+  ]
+}

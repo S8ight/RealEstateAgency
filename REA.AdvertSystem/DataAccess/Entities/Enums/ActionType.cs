@@ -2,6 +2,6 @@
 
 public enum ActionType
 {
-    Sale,
-    Rent
+    Rent,
+    Sale
 }

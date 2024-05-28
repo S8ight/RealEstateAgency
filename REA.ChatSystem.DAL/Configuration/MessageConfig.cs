@@ -32,8 +32,8 @@ public class MessageConfig : IEntityTypeConfiguration<Message>
             .IsRequired()
             .HasDefaultValue(0);
 
-        // builder.HasOne(m => m.Chat)
-        //     .WithMany(c => c.Messages)
-        //     .HasForeignKey(m => m.ChatId);
+        builder.HasOne(m => m.Chat)
+            .WithMany(c => c.Messages)
+            .HasForeignKey(m => m.ChatId);
     }
 }

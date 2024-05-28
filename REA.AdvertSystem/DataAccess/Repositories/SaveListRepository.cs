@@ -17,6 +17,7 @@ public class SaveListRepository : ISaveListRepository
     {
         return _context.SaveLists
             .Include(sl => sl.Advert)
+            .Include(a => a.Advert.PhotoList)
             .Where(p => p.UserId == userId)
             .AsQueryable();
     }

@@ -15,6 +15,6 @@
         
         public bool Checked { get; set; }
         
-        //public Chat Chat { get; set; }
+        public Chat Chat { get; set; }
     }
 }

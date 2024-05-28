@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
+using REA.ChatSystem.DAL.Interfaces;
 
 namespace REA.ChatSystem.DAL.Context;
 

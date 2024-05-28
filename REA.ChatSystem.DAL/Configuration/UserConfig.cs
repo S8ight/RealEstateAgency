@@ -18,8 +18,8 @@ public class UserConfig : IEntityTypeConfiguration<User>
             .HasMaxLength(255)
             .IsRequired();
 
-        // builder.HasMany(u => u.Chat)
-        //     .WithOne(c => c.User)
-        //     .HasForeignKey(c => c.UserId);
+        builder.HasMany(u => u.Chat)
+            .WithOne(c => c.User)
+            .HasForeignKey(c => c.UserId);
     }
 }

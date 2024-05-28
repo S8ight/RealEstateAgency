@@ -21,13 +21,13 @@ public class ChatConfig : IEntityTypeConfiguration<Chat>
             .HasDefaultValueSql("GETDATE()")
             .IsRequired();
 
-        // builder.HasOne(c => c.User)
-        //     .WithMany(u => u.Chat)
-        //     .HasForeignKey(c => c.UserId)
-        //     .OnDelete(DeleteBehavior.NoAction);
-        //
-        // builder.HasMany(c => c.Messages)
-        //     .WithOne(m => m.Chat)
-        //     .HasForeignKey(a => a.ChatId).OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne(c => c.User)
+            .WithMany(u => u.Chat)
+            .HasForeignKey(c => c.UserId)
+            .OnDelete(DeleteBehavior.NoAction);
+        
+        builder.HasMany(c => c.Messages)
+            .WithOne(m => m.Chat)
+            .HasForeignKey(a => a.ChatId).OnDelete(DeleteBehavior.NoAction);
     }
 }

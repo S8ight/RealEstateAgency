@@ -20,3 +20,4 @@ public class User
     
     public virtual ICollection<Advert>? Adverts { get; set; }
 }
+
